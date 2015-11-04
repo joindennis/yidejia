@@ -1,0 +1,31 @@
+<div class="cont lm-col-9 paddingTop40">
+	
+<?php
+//echo '<pre>';
+//print_r($dataBilling);	
+//echo '</pre>';
+?>
+
+
+<p>Billing Address:</p>
+
+
+<?php
+
+
+ 
+
+if ($dataBilling['billing_company'] !='') {echo 'Company: '.$dataBilling['billing_company'].'<br>';}
+if ($dataBilling['first_name'] !='') {echo $dataBilling['first_name']." ".$dataBilling['last_name'].'<br>';}
+if ($dataBilling['billing_address_1'] !='') {echo 'Address: '.$dataBilling['billing_address_1'].'<br>';}
+if ($dataBilling['billing_city'] !='') {echo 'City: '.$dataBilling['billing_city'].", ".$dataBilling['billing_state'].", ".$dataBilling['billing_postcode']."<br>";}
+if ($dataBilling['billing_country'] !='') {echo 'Country: '.$dataBilling['billing_country'].'<br>';}
+if ($dataBilling['billing_phone'] !='') {echo "Phone: ".$dataBilling['billing_phone'].'<br>';}
+echo "Email: ".$dataBilling['billing_email'].'<br>';
+ 
+
+?>
+ 
+<a class="tabAjax updateButton" onclick="LoadContent(4); return false;">Change Billing Address</a>
+
+</div>

@@ -1,0 +1,54 @@
+<?php 
+
+ 
+
+foreach ($helpMessages as $key => $value) {
+   
+ 
+	
+$ts = $helpMessages[$key]['created'];
+$date = new DateTime("@$ts");
+$human_date = $date->format(' Y-m-d H:i:s');
+
+$full_name = ($helpMessages[$key]["name"]?$helpMessages[$key]["name"]:"No").' '.($helpMessages[$key]["last_name"]?$helpMessages[$key]["last_name"]:" name").'<br>'.$helpMessages[$key]['email'];
+
+
+ 
+	if ($helpMessages[$key]["phone"]){
+	$phone = '<span class="helpMessagePhone"><strong>Phone:</strong> '.$helpMessages[$key]["phone"].'</span>';
+}
+else {
+	$phone = '<span class="helpMessageNoPhone">No phone</span>';
+}
+	
+ 
+ 
+	$content = $helpMessages[$key]["message"];
+	$topic = $helpMessages[$key]["topic"];
+	$hash_Email = $helpMessages[$key]['hash'];
+	
+   
+     echo '
+     <div class="helpMessageItem">
+     <div class="helpMessageDate">'.$human_date.' '.$phone.'</div>
+     
+ 
+     
+    <a onclick="LoadMessage(\''; echo $hash_Email; echo '\'); return false;">
+     <div class="helpMessageTopic">'.$topic.'</div>
+      </a>
+     <div class="helpMessageMessage">
+    
+     
+     '.$content.'
+    
+     </div>
+    
+     
+     </div>';
+ }
+
+ 
+
+
+?>

@@ -1,0 +1,130 @@
+
+  <div id="myOrders">
+      
+      <p></p>
+      <?php
+      
+    //  echo '<pre>';
+  //  print_r($orders);
+      
+    // echo 'array='; print_r($urlList);
+      
+  // echo '</pre>';
+      
+  if (count($orders) == 0 ){
+      	echo 'You do not have any orders.';
+      } 	
+       	else {
+   
+      foreach ($orders as $key => $value){
+      	
+      	
+      	
+    
+ 	// get url_name
+ 	$urlName= $value['lines'][0]['url_name']; 
+ 	$urlExplode = explode("/", $urlName);
+ 	
+ 	// get url type
+ 	$urlType= intval($value['lines'][0]['type']);
+ 
+	// creating image url 
+    $id = $value['lines'][0]['goods_id'];
+    $image_url = 'http://img1.atido.com/'.$urlList[$id]['imgname'];
+    
+    
+    $add_to_cart_id = $orders[$key]['lines'][0]['goods_id']; 
+    
+    
+    if ($orders[$key][status] == '录入'){
+    	$status = '<span class="notification_error">'.'Not Paid'.'</span>';
+    	$status_0 = 0;
+    	$delete_order_id = $orders[$key][id];
+    	$notification_box_color = '#ccc';
+    	
+    	$goods_qty = $orders[$key][goods_qty];
+  		$goods_explode = explode(';', $goods_qty);
+ 
+		// remove empty elements from array 
+    	$goods_explode = array_filter($goods_explode);
+    	
+    	$goods_count = count($goods_explode);
+    	$goods_count_notification = 'Number of items: '.$goods_count;
+    	
+    	
+    	
+    	$show_add_to_cart = 1;
+    }
+    else if ($orders[$key][status] == '已付款'){
+    	$status = '<span class="notification_success">'.'Payment received'.'</span>';
+    	$status_0 = 1;
+    	$notification_box_color = '#01dfa5';
+    	
+    	$goods_qty = $orders[$key][goods_qty];
+  		$goods_explode = explode(';', $goods_qty);
+ 
+		// remove empty elements from array 
+    	$goods_explode = array_filter($goods_explode);
+    	
+    	$goods_count = count($goods_explode);
+    	$goods_count_notification = 'Number of items: '.$goods_count;
+    	
+    	$show_add_to_cart = 0;
+    	
+    }
+    
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$charactersLength = strlen($characters);
+    	$randomString = '';
+		
+    	for ($i = 0; $i < 10; $i++) {
+        	$randomString .= $characters[rand(0, $charactersLength - 1)];
+    	}	
+			
+			
+	$var_1 = $orders[$key]['order_code'];
+	$var_2 = $orders[$key]['created'];
+	$var_3 = $orders[$key]['id'];
+	
+		$status_transaction = $confirmed[0]['order_id'];
+ 
+		//echo "<pre>";
+		//print_r($status_transaction);
+		//print_r($key);
+		//echo "</pre>";
+ 
+	
+
+	
+	if ($status_transaction == $var_1){
+		$display_status = '<span class="confirned_success">Confirmed</span>';
+	}
+	else {
+		$display_status = '<span class="confirned_notconfirned">NOT Confirmed</span>';
+	}
+	//echo $display_status;
+	
+	$full_var = $var_1 . '|' . $var_2 . '|' . $var_3;
+	$encoded_base64 = base64_encode($full_var);
+	//echo $full_var.'<br>';
+	//echo $encoded_base64; 
+	
+			  	
+    echo '<a href="#"  onclick="LoadItems(\''.$var_1.'\'); return false;"><div class="orders_preview_box itemOrder '.$randomString.'"  style="border-color:'.$notification_box_color.'">';	
+      
+    echo '<div class="itemOrderDate '.$randomString.'" style="background-color:'.$notification_box_color.'">';		
+    echo '<span>'.$value[the_date]; echo '</span><span class="order_id">Order ID: '.$var_1.'</span> <span class="status_confirm">'.$display_status.'</span></div>';
+     
+ 
+  echo '<div clas="viewListOfItems"></div>';	
+     
+         echo '</div>';	
+      
+   
+    }
+      } 
+      
+      ?>
+      
+     </div>
+     

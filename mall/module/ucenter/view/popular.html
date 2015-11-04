@@ -1,0 +1,59 @@
+  <div id="ajax_popular">
+                  <div class="container">
+                                        <div class="row">
+                                            <div class="lm-col-12 lol-page-item" >
+                                                <div class="lol-item-column">
+                                                    <div class="woocommerce shortcode-row">
+                                                        <div class="products">
+                                                            <div class="row">
+                                                            	
+                                                            <?php
+                                                          
+                                                            
+                                                              	foreach ($urlList as $key => $value){
+
+	$posted = date('m/d/Y H:i:s', $urlList[$key]['created']);
+			    
+			   
+	// get url_name
+ 	$urlName= $urlList[$key]['url_name']; 
+ 	$urlExplode = explode("/", $urlName);
+ 	
+ 	// get url type
+ 	$urlType= $urlList[$key]['type'];
+			   
+			   
+			   	
+   	echo '   <div class="product-item lm-col-4">';
+   	
+   	echo '<div class="product-wrap"><a target="_blank" href="'.getProcutUrl($urlExplode[0],$urlType).'"><img src="http://img1.atido.com/'.$urlList[$key][imgname].'" /></a> </div>';
+
+	echo '<a class="button product_type_simple"   data-quantity="1" data-product_id="'.$urlList[$key][goods_id].'" rel="nofollow" href="'.getProcutUrl($urlExplode[0],$urlType).'">VIEW ITEM</a><br>';
+ 
+  echo '<div class="recomendation_description">'.$urlList[$key][goods_name].'</div>';
+	echo '<div title="Rated '.$show_stars_of_five[$key].' out of 5" class="star-rating">
+      <span style="width:'; ?><?php if ($show_percent_array[$key] <= 0) {echo 75;} else {echo $show_percent_array[$key];} ?><?php echo '%">
+        <strong class="rating"><?php echo $show_stars_of_five[$key]; ?></strong>
+        out of 5
+        </span>
+        </div>';
+                                                                                
+    echo '<div class="popular_price">$'.$urlList[$key][sale_price].'</div>';                                                                            
+ 
+    echo '</div>';
+
+	} // foreach
+                                                            
+                                                            
+    ?>	
+                                                            	
+                                                            	
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+                                                            	                                            

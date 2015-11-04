@@ -1,0 +1,242 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+          
+      
+<!-- BEGIN #page -->
+<div class="container">
+            	
+            	
+     <div class="row ucenter">
+            		
+          
+      <!-- including left menu -->  		
+      <?php include ("ucenter_menu.html"); ?>
+            		
+            		
+         
+      <!-- main content -->
+       <div class="cont lm-col-9  paddingTop40">
+       <div class="user_center_header">
+       <a name="chapter"></a> <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+       
+      
+    
+       
+       </div>
+            			
+        
+         
+         <div class="points_table">
+         	
+ 
+
+
+ 
+ 
+ <?php
+ 
+
+ 
+  //	 echo '<pre>';
+   //  print_r($orders);
+      
+    // echo 'array='; print_r($urlList);
+      
+  //	 echo '</pre>';
+  
+  if (count($orders) == 0 ){
+      	echo 'You do not have any orders.';
+      } 	
+      
+      else {
+      	
+      
+ 
+  
+  
+  foreach ($ordersPaid as $key => $value){
+  		
+  		$price_of_item = $ordersPaid[$key]['the_amount'];
+  		$total_spent_money += $price_of_item; 
+  	
+  	
+  }
+  
+ 
+
+	 
+        	
+        	switch (true) {
+        		
+        		case (($total_spent_money >= 0) and ($total_spent_money <=499)):
+        	  
+        		$points_range = 2;
+        		break;
+        		
+        		
+        		
+        		case (($total_spent_money >=500) and ($total_spent_money <=999)):
+        		 
+        		$points_range = 3;
+        		break;
+        		
+        		
+        		case (($total_spent_money >=1000) and ($total_spent_money <=2399)):
+        		
+        		$points_range = 4;
+        		break;
+        		
+        		
+        		case (($total_spent_money >=2400) and ($total_spent_money <=4799)):
+        		
+        		$points_range = 5;
+        		break;
+        		
+        		
+        		case ($total_spent_money >=4800):
+        		
+        		$points_range = 6;
+        		break;
+ 
+        		
+        	}
+
+       
+
+  
+ foreach ($ordersPaid as $key => $value){
+ 	
+ 	
+  $amount_item = $ordersPaid[$key]['the_amount'];
+ 
+ 	$pointsPerOrder = floor($amount_item / 30)*$points_range;
+ 	
+ 	
+ 	$totalPoints = $totalPoints + $pointsPerOrder;  		  
+ 		  
+ }
+ 
+ 
+ 
+ if ($totalPoints == 0){
+ 	echo '<span class="points">No points earned.</span>';
+ }
+ 
+ else {
+ 	
+ 	if ($totalPoints >0) {
+ 	echo '<a class="ucenter_tab green_redeem_button" href="/index.php?m=ucenter&c=index&a=redeem">Go to Redeem page</a>';	
+ 	}
+ 	
+ foreach ($ordersRedeem as $key => $value) {
+     if ($ordersRedeem[$key]['response'] == 'SUCCESS'){
+ 		 $totalPointsSpent += $ordersRedeem[$key]['the_amount'];
+ 	}
+ 	else {
+ 		$totalPointsSpent += 0;
+ 	}
+ }
+ 
+ 
+  	 	
+ 	
+ 
+ 
+ 
+	 
+	//	 echo "<pre>";
+		// print_r($ordersRedeem);
+		 //echo "</pre>";
+	 
+ 	
+ 	 echo '<table class="tftable" border="1"><tr><th>Date</th><th>Gained points</th><th>Price</th><th>Status</th></tr>';
+  
+ 	 foreach ($ordersPaid as $key => $value){
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+	// show points per order 	
+ 	$amount_item = $ordersPaid[$key]['the_amount'];
+ 	$pointsPerOrder = floor($amount_item / 30)*$points_range;
+ 	
+ 	
+ 	 	
+ 	 	
+ 	 if ($ordersPaid[$key][status] == '录入'){
+    	$status = '<span class="notification_error table_no_bg">'.'Not Paid'.'</span>';
+    }
+    else if ($ordersPaid[$key][status] == '已付款'){
+    	$status = '<span class="notification_success table_no_bg">'.'Payment received'.'</span>';
+    }
+ 
+ 	
+ 	echo '<tr><td>'.$ordersPaid[$key]['the_date'].'
+ 		  </td><td class="amount">'.$pointsPerOrder.'
+ 		  </td> <td class="amount">'.$ordersPaid[$key]['the_amount'].'
+ 		  </td> <td class="center">'.$status.'
+ 		  </td></tr>';	
+ 	 	
+ 	 	
+ 	 	
+ 	 }
+ 	
+ 	 
+ 	$points_available = $totalPoints - $totalPointsSpent;
+ 	
+ 	echo '</table><p class="curPoints mobile_only">Total points earned: <span class="notification_simple">'.$totalPoints.'</span> Available: <span class="notification_simple">'.$points_available.'</span></p>';	
+ 	
+   
+ 	
+ }
+ 
+   
+ 
+ }
+ ?>
+ 
+    
+ 
+      
+ 
+     <p></p>       			 
+    			
+   
+ 
+   <table class="tftable" border="1">
+<tr><th>Level</th><th>Spent</th><th>Points</th></tr>
+<tr><td>Silver</td><td>$1-$499</td><td>Earn 2 points per $30</td></tr>
+<tr><td>Golden</td><td>$500-$999</td><td>Earn 3 points per $30</td></tr>
+<tr><td>Platinum</td><td>$1000-$2399</td><td>Earn 4 points per $30</td></tr>
+<tr><td>Diamond</td><td>$2400-$4799</td><td>Earn 5 points per $30</td></tr>
+<tr><td>Sapphire</td><td>Above $4800</td><td>Earn 6 points per $30</td></tr>
+</table>
+   
+
+    
+     <ol>
+     	<li>As a VIP member, you can earn points by reviewing products. Receive 1 point for every 10 product reviews.
+</li>
+ 
+<li> Sign up as a member and receive a 10% off promo code. This code can be redeemed for up to one week after the sign up date. </li>
+
+<li>As a VIP member, you'll get a special gift on your birthday. Get a 20% off promo code for all purchases made under $4oo (excluding HST). 
+</li>
+     </ul>  
+       
+       </div>
+     
+	   
+ 
+        </div>
+       </div>
+       
+       </div>
+       <!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>

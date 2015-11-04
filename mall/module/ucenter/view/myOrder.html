@@ -1,0 +1,187 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+      
+      
+        
+      
+<!-- BEGIN #page -->
+<div class="container">
+            	
+            	
+     <div class="row ucenter">
+            		
+          
+      <!-- including left menu -->  		
+      <?php include ("ucenter_menu.html"); ?>
+            		
+            		
+         
+      <!-- main content -->
+       <div class="cont lm-col-9  paddingTop40">
+
+       	
+       <div class="user_center_header">
+       <a name="chapter"></a> <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+ 	     <a class="tabAjax mobile_tab" href="/index.php?m=ucenter&c=index&a=myOrder" style="background-color:#FFF;">All</a> <a class="tabAjax mobile_tab" href="/index.php?m=ucenter&c=index&a=help" onclick="LoadUnpaid(); return false;">Unpaid</a> <a class="tabAjax mobile_tab" onclick="LoadPaid(); return false;">Paid</a>
+ 	   </div>
+ 	   
+ 	   <div id="myOrders">
+      
+      <p></p>
+      <?php
+      
+    //  echo '<pre>';
+  //  print_r($orders);
+      
+    // echo 'array='; print_r($urlList);
+      
+  // echo '</pre>';
+      
+  if (count($orders) == 0 ){
+      	echo 'You do not have any orders.';
+      } 	
+       	else {
+   
+      foreach ($orders as $key => $value){
+    
+ 	// get url_name
+ 	$urlName= $value['lines'][0]['url_name']; 
+ 	$urlExplode = explode("/", $urlName);
+ 	
+ 	// get url type
+ 	$urlType= intval($value['lines'][0]['type']);
+ 
+	// creating image url 
+    $id = $value['lines'][0]['goods_id'];
+    $image_url = 'http://img1.atido.com/'.$urlList[$id]['imgname'];
+    
+    
+    $add_to_cart_id = $orders[$key]['lines'][0]['goods_id']; 
+    
+    
+    if ($orders[$key][status] == '录入'){
+    	$status = '<span class="notification_error">'.'Not Paid'.'</span>';
+    	$status_0 = 0;
+    	$delete_order_id = $orders[$key][id];
+    	$notification_box_color = '#ccc';
+    	
+    	$goods_qty = $orders[$key][goods_qty];
+  		$goods_explode = explode(';', $goods_qty);
+ 
+		// remove empty elements from array 
+    	$goods_explode = array_filter($goods_explode);
+    	
+    	$goods_count = count($goods_explode);
+    	$goods_count_notification = 'Number of items: '.$goods_count;
+    	
+    	
+    	
+    	$show_add_to_cart = 1;
+    }
+    else if ($orders[$key][status] == '已付款'){
+    	$status = '<span class="notification_success">'.'Payment received'.'</span>';
+    	$status_0 = 1;
+    	$notification_box_color = '#20d396';
+    	
+    	$goods_qty = $orders[$key][goods_qty];
+  		$goods_explode = explode(';', $goods_qty);
+ 
+		// remove empty elements from array 
+    	$goods_explode = array_filter($goods_explode);
+    	
+    	$goods_count = count($goods_explode);
+    	$goods_count_notification = 'Number of items: '.$goods_count;
+    	
+    	$show_add_to_cart = 0;
+    	
+    }
+    
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$charactersLength = strlen($characters);
+    	$randomString = '';
+		
+    	for ($i = 0; $i < 10; $i++) {
+        	$randomString .= $characters[rand(0, $charactersLength - 1)];
+    	}	
+			
+			
+	$var_1 = $orders[$key]['order_code'];
+	$var_2 = $orders[$key]['created'];
+	$var_3 = $orders[$key]['id'];
+	
+	$full_var = $var_1 . '|' . $var_2 . '|' . $var_3;
+	$encoded_base64 = base64_encode($full_var);
+	//echo $full_var.'<br>';
+	//echo $encoded_base64; 
+	
+			  	
+    echo '<div class="itemOrder '.$randomString.'"  style="border-color:'.$notification_box_color.'">';	
+      
+    echo '<div class="itemOrderDate '.$randomString.'" style="background-color:'.$notification_box_color.'">';		echo '<span>'.$value[the_date]; echo '</span></div>';
+      
+    echo '<div class="itemOrderPreview">'; 	echo '<div class="orderImage"><a target="_blank" href="'; echo getProcutUrl($urlExplode[0],$urlType); echo '"><img src="'.$image_url.'"></a></div>'; 
+    echo '<div class="productIDs">Product ID: <span class="productNumber">'.$id.'</span><br><span class="number_of_items">'.$goods_count_notification.'</span><span class="productStatus"><span class="mobile_only">Status:</span> '.$status.'</span></div>'; echo '</div>';	
+   
+
+	echo '<div class="itemOrderPrice">';		echo '<span class="price">CAD &#36;'.$orders[$key][the_amount]; echo '</span></div>';
+   
+   
+ 
+   
+   
+    	echo '<div class="itemOrderActions">';	
+    	
+    	//show or not Add to Cart button
+    	if ($show_add_to_cart == 1) {
+    	echo '<a   data-product_id="'.$add_to_cart_id .'" data-quantity="1" class="tabAjax _br add_to_cart_button">Add to cart</a><a href="'.getProcutUrl($urlExplode[0],$urlType).'#customer_reviews" class="tabAjax _br" target="_blank">Feedback</a>';	
+    	}
+    	else {
+    		echo '<a href="'.getProcutUrl($urlExplode[0],$urlType).'#customer_reviews" class="tabAjax _br"  target="_blank">Feedback</a>';
+    	}
+    	//END show or not Add to Cart button
+    	
+    	
+ 
+    	// if payment not received      
+        if ($status_0 == 0){
+		echo '<a  class="_br redBackground order_list_item_remove"  data-quantity="1"  data-hash="'.$randomString.'"   data-product_id="'.$encoded_base64.'">Delete</a>';  	
+  		} 
+   		// END if payment not received
+ 
+    	echo '</div>';   
+      
+
+      
+    echo '</div>';	
+    echo '<div class="'.$randomString.' deleted"><p>Deleted</p></div>';
+    }
+      } 
+      
+      ?>
+      
+     </div>
+      <!-- my orders --> 
+      
+       </div>
+            			 
+            			
+            			
+     
+            		
+            		
+       <div class="cont lm-col-9  paddingTop40">
+            
+  
+ 
+   
+            		 
+  	   </div>
+            		
+ 
+       </div>
+            	
+       </div>
+       <!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>

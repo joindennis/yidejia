@@ -1,0 +1,143 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+          
+      
+<!-- BEGIN #page -->
+<div class="container">
+            	
+            	
+     <div class="row ucenter">
+            		
+          
+      <!-- including left menu -->  		
+      <?php include ("ucenter_menu.html"); ?>
+            		
+            		
+         
+      <!-- main content -->
+       <div class="cont lm-col-9  paddingTop40">
+       <div class="user_center_header">
+       <a name="chapter"></a> <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+       </div>
+            			 
+            			
+            			
+       </div>
+            		
+            		
+       <div class="cont lm-col-9  paddingTop40">
+ 
+        
+        <?php 
+        
+        
+      //  print_r($data);
+       
+     //  print_r($userComments);
+       if (count($userComments) == 0 ){
+ 			echo 'No reviews.';
+ 		}
+ 		else {
+       
+        
+        ?>
+        
+        
+        <div class="reviews_table">
+
+
+
+<?php
+ 
+
+ foreach ($userComments as $key=>$value)
+        {
+        	
+ $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$charactersLength = strlen($characters);
+    	$randomString = '';
+		
+    	for ($i = 0; $i < 10; $i++) {
+        	$randomString .= $characters[rand(0, $charactersLength - 1)];
+    	}	
+			
+			
+	$var_1 = $userComments[$key]['id'];
+	$var_2 = $userComments[$key]['the_date'];
+	$var_3 = $userComments[$key]['created'];
+	
+ 
+	
+	$full_var = $var_1 . '|' . $var_2 . '|' . $var_3;
+	$encoded_base64 = base64_encode($full_var);
+	
+	        	
+        	
+$review = substr($userComments[$key]['content'],0,200).'... ';
+ 
+
+				// get url_name
+ 				$urlName= $goods[$key]['response']['url_name']; 
+ 				$urlExplode = explode("/", $urlName);
+ 	
+ 				// get url type
+ 				$urlType= $goods[$key]['response']['type'];
+ 				
+ 				$fullUrl = getProcutUrl($urlExplode[0],$urlType);
+
+
+
+
+
+echo '<div class="reviewMessageItem '.$randomString.'">';
+echo '	<div class="reviewMessageDate '.$randomString.'">'.$userComments[$key]['the_date'].'</div>';
+
+echo '	<a href="'.$fullUrl.'">';
+echo '		<div class="reviewMessageMessage">';
+echo $review;
+
+echo '			<span class="notification_icon"></span>';
+echo '		</div>';
+echo '		</a>';
+
+ 
+
+
+echo '		<div class="reviewMessageTopic">';
+	
+echo '<a  class="_br redBackground review_list_item_remove"  data-quantity="1"  data-hash="'.$randomString.'"   data-review_id="'.$encoded_base64.'">Delete</a>';  
+	
+echo '	</div>';
+
+echo '	</div>';
+echo '<div class="'.$randomString.' deleted"><p>Deleted</p></div>';
+
+
+}
+
+
+
+?>
+
+
+
+<?php
+
+} // count reviews 
+
+?>
+
+</div>       
+         
+ 
+            		 
+  	   </div>
+     		
+      
+       </div>
+            	
+       </div>
+       <!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>

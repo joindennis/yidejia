@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9 yes-responsive lol-sticky-header-yes header-no-transparent  blog-classic " lang="en-US">
+        <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js yes-responsive lol-sticky-header-yes header-no-transparent  blog-classic " lang="en-US">
+    <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <?php include(TEMPLATE_DIR.'ca_seo.html'); ?>
+        <?php include(TEMPLATE_DIR.'ca_head.html'); ?>
+    </head>
+
+    <body class="page page-id-14 page-parent page-template-default logged-in no-customize-support woocommerce-checkout woocommerce-page">
+
+        <!--  BEGIN sidebar -->
+        <?php include(TEMPLATE_DIR.'sidebar.html'); ?>
+        <!--  END sidebar -->
+
+        <!-- BEGIN wrap -->
+        <div id="wrap">
+
+            <!-- BEGIN branding -->
+            <?php include(TEMPLATE_DIR.'ca_header.html'); ?>
+            <!-- END branding -->
+
+            <div id="page-title-wrap" style="background-color:;" class="header-dark ">
+
+                <div class="page-title">
+                    <h1>Payment</h1>
+
+                </div>
+
+            </div>
+
+            <div class="container crumbs-wrap">
+                <!-- BEGIN row -->
+                <div class="row">
+                    <!-- BEGIN col-12 -->
+                    <div class="lm-col-12">
+
+                        <nav class="crumbs">
+                            <span>You are here:</span>
+                            <a class="home" href="http://wp.atido.com">Home</a>
+                            /
+                            <span>Payment</span>
+                        </nav>
+                    </div>
+                    <!-- END col-12 -->
+                </div>
+                <!-- END row -->
+            </div>
+
+            <!-- BEGIN #page -->
+            <div id="page" class="hfeed " >
+
+                <!-- BEGIN #main -->
+                <div id="main">
+
+                    <!-- BEGIN #content -->
+                    <div id="content" class="" role="main">
+                        <!-- BEGIN #post -->
+                        <article id="post-14" class="post-14 page type-page status-publish hentry">
+
+                            <div class="container">
+                                <!-- BEGIN row -->
+                                <div class="row">
+                                    <!-- BEGIN col-12 -->
+                                    <div class="lm-col-12">
+
+                                        <!-- BEGIN .entry-conent -->
+                                        <div class="entry-content">
+                                            <div class="woocommerce">
+                                                <div class="thankyou-wrap"> <i class="icon lineicon lineicon-check-circle"></i>
+
+                                                    <p class="thankyou_text">Thank you. Your order has been received.</p>
+
+                                                    <div class="order_details_wrap">
+                                                        <ul class="order_details">
+                                                            <li class="order">
+                                                                Order: <strong>#<?php echo $data['order_code']; ?></strong>
+                                                            </li>
+                                                            <li class="date">
+                                                                Date: <strong><?php echo $data['the_date']; ?></strong>
+                                                            </li>
+                                                            <li class="total">
+                                                                Total:
+                                                                <strong><span class="amount">&#36;<?php echo sprintf('%0.2f',$data['the_amount']); ?></span></strong>
+                                                            </li>
+                                                            <li class="method">
+                                                                Payment method:
+                                                                <strong><?php echo $data['transaction_type']; ?></strong>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="order_details_text">
+                                                        <p>
+                                                            Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won&#8217;t be shipped until the funds have cleared in our account.
+                                                        </p>
+                                                        <h2>Our Bank Details</h2>
+                                                        <ul class="order_details bacs_details">
+                                                            <li class="order">Order: <strong>#<?php echo $data['transaction_id']; ?></strong></li>
+                                                            <li class="date">Date: <strong><?php echo $data['pay_date']; ?></strong></li>
+                                                            <li class="method"> Payment method: <strong><?php echo $data['transaction_type']; ?></strong></li>
+                                                        </ul>
+                                                    </div>
+                                                    <h2 class="order-details-title">Order Details</h2>
+                                                    <table class="shop_table order_details">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="product-name">Product</th>
+                                                                <th class="product-total">Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="order_item">
+                                                                <?php foreach((array)$data['lines'] as $v){ ?>
+                                                                <td class="product-name">
+                                                                    <a href="<?php echo getProcutUrl($v['url_name'],$v['type']); ?>"><?php echo $v['goods_name']; ?></a>
+                                                                    <strong class="product-quantity">&times; <?php echo $v['quantity']; ?></strong>
+                                                                    <dl class="variation">
+                                                                        <dt class="variation-pa_size">Size:</dt>
+                                                                        <dd class="variation-pa_size">
+                                                                            <p>Large</p>
+                                                                        </dd>
+
+                                                                        <dt class="variation-Format">Format:</dt>
+                                                                        <dd class="variation-Format">
+                                                                            <p>100</p>
+                                                                        </dd>
+
+                                                                        <dt class="variation-Color">Color:</dt>
+                                                                        <dd class="variation-Color">
+                                                                            <p>Blue</p>
+                                                                        </dd>
+                                                                    </dl>
+                                                                </td>
+                                                                <?php } ?>
+                                                                <td class="product-total">
+                                                                    <span class="amount">&#36;<?php echo sprintf('%0.2f',$data['the_amount']); ?></span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th scope="row">Cart Subtotal:</th>
+                                                                <td>
+                                                                    <span class="amount">&#36;<?php echo sprintf('%0.2f',$data['the_amount']); ?></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Shipping:</th>
+                                                                <td>Free Shipping</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Payment Method:</th>
+                                                                <td><?php echo $data['transaction_type']; ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Order Total:</th>
+                                                                <td>
+                                                                    <span class="amount">&#36;<?php echo sprintf('%0.2f',$data['the_amount']); ?></span>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                    <a class="button lol-button printMe"  >PRINT</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END .entry-conent -->
+
+                                    </div>
+                                    <!-- END col-12 -->
+                                </div>
+                                <!-- END row -->
+                            </div>
+
+                        </article>
+                        <!-- END #post -->
+                    </div>
+                    <!-- END #content -->
+
+                </div>
+                <!-- END #main -->
+
+            </div>
+            <!-- END #page -->
+
+            <?php include(TEMPLATE_DIR.'ca_footer.html'); ?>
+        </div>
+        <!-- END wrap -->
+
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<?php 
+
+	if (count($readMessages) == 0){
+			echo 'No messages.';
+		}
+  
+
+foreach ($readMessages as $key => $value) {
+   
+ 
+	
+$ts = $readMessages[$key]['created'];
+$date = new DateTime("@$ts");
+$human_date = $date->format(' Y-m-d H:i:s');
+
+$full_name = ($readMessages[$key]["name"]?$readMessages[$key]["name"]:"No").' '.($readMessages[$key]["last_name"]?$readMessages[$key]["last_name"]:" name").'<br>'.$readMessages[$key]['email'];
+
+if ($readMessages[$key]["phone"]){
+	$phone = '<span class="helpMessagePhone"><strong>Phone:</strong> '.$readMessages[$key]["phone"].'</span>';
+}
+else {
+	$phone = '<span class="helpMessageNoPhone">No phone</span>';
+}
+
+ 
+	
+	
+ 
+ 
+	$content = $readMessages[$key]["message"];
+	$hash_Email = $readMessages[$key]['hash'];
+	$topic = $readMessages[$key]['topic'];
+	
+	
+   
+      echo '
+     <div class="helpMessageItem">
+     <div class="helpMessageDate">'.$human_date.'
+     	
+     '.$phone.' 
+     	
+     	
+     	</div>
+     
+   
+     <a onclick="supportLoadMessage(\''; echo $hash_Email; echo '\'); return false;">
+     <div class="helpMessageTopic">'.$topic.' </div>
+     </a>
+      
+     <div class="helpMessageMessage">
+     
+     '.$content.'
+    
+     </div>
+     
+     </div>';
+ }
+
+ 
+
+
+?>

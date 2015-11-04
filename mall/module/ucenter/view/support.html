@@ -1,0 +1,63 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+          
+      
+<!-- BEGIN #page -->
+<div class="container">
+            	
+            	
+     <div class="row ucenter">
+            		
+          
+      <!-- including left menu -->  		
+      <?php include ("ucenter_menu.html"); ?>
+            		
+            		
+         
+      <!-- main content -->
+       <div class="cont lm-col-9  paddingTop40">
+       <div class="user_center_header">
+       <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+       
+       <div class="tabsAjax">
+            				
+       <a class="tabAjax mobile_tab" onclick="supportLoadSkinResultsPage('hash','skinTestResults'); return false;"  style="background-color:#FFF;">Skin Results</a> <a class="tabAjax mobile_tab" onclick="supportLoadFacebookResultsPage(); return false;">Sample giveaway</a> <a class="tabAjax mobile_tab"  onclick="supportLoadAllHelpMessagesPage('hash','allHelpMessages'); return false;">User messages</a> <a class="tabAjax mobile_tab"  onclick="supportLoadUnreadHelpMessagesPage(); return false;">Unread</a> <a class="tabAjax mobile_tab"  onclick="supportLoadReadHelpMessagesPage(); return false;">Read</a> <a class="tabAjax mobile_only_create_notification mobile_tab"  onclick="supportCreateNotification(); return false;">Create notification<span class="notification">&nbsp;</span></a>   
+            				
+       </div>
+    
+       
+       </div>
+            			
+       </div>
+            		
+     		
+       <div class="ucenter_contBolck">
+       	
+ 
+  		 
+  
+          <div class="cont lm-col-9  paddingTop40">
+ 
+           <div id="myHelp"></div>  
+          
+    <div id="supportBox">
+    	
+    	
+    	
+    	
+    </div>
+   
+ <script> supportLoadSkinResultsPage('hash','skinTestResults'); </script> 
+ 
+ 
+       </div>
+	 
+	  </div>
+      
+       </div>
+       
+       </div>
+       <!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>

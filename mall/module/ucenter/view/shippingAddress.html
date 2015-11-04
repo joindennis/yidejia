@@ -1,0 +1,34 @@
+<div class="cont lm-col-9 paddingTop40">
+	
+<?php
+//echo '<pre>';
+//print_r($data);	
+//echo '</pre>';
+?>
+
+
+<p>Shipping Address:</p>
+
+<?php
+
+
+if ($data['ship_addr'] == '' and $data['ship_city'] == '' and $data['ship_country'] == '' and $data['phone'] == ''){
+	echo 'You do not have any shipping address, yet.';
+}
+else {
+
+if ($data['first_name'] !='') {echo $data['first_name']." ".$data['last_name'].'<br>';}
+if ($data['ship_addr'] !='') {echo 'Address: '.$data['ship_addr'].'<br>';}
+if ($data['ship_city'] !='') {echo 'City: '.$data['ship_city'].", ".$data['ship_prov'].", ".$data['ship_zip']."<br>";}
+if ($data['ship_country'] !='') {echo 'Country: '.$data['ship_country'].'<br>';}
+if ($data['phone'] !='') {echo "Phone: ".$data['phone'].'<br>';}
+echo "Email: ".$data['email'].'<br>';
+	
+}
+
+
+?>
+
+<a class="tabAjax updateButton" onclick="LoadContent(5); return false;">Change Shipping Address</a>
+
+</div>

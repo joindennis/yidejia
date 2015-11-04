@@ -1,0 +1,125 @@
+<nav id="mobile-menu" class="light" role="navigation">
+    <div class="container">
+        <!-- BEGIN row -->
+        <div class="row">
+            <!-- BEGIN col-12 -->
+            <div class="lm-col-12">
+                <div class="m-col-6">
+                    <div class="menu-mobile-container">
+                        <ul id="menu-mobile" class="mobile-menu">
+                            <li id="menu-item-476" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-11 current_page_item menu-item-476">
+                                <a href="/">Home</a>
+                            </li>
+                            <li id="menu-item-477" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-477">
+                                <a href="/skincare.html">SKINCARE</a>
+                            </li>
+                           <li id="menu-item-475" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-475">
+                                <a href="/makeup.html">MAKEUP</a>
+                            </li>
+                           
+                           
+                            <li id="menu-item-475" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-475">
+                                <a href="/clothing.html">CLOTHING</a>
+                            </li>
+                            
+                            <li id="menu-item-475" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-475">
+                                <a href="/skin">SKINTEST</a>
+                            </li>
+                            <li id="menu-item-475" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-475">
+                                <?php if(!$user){ ?>
+                                	<a href="/login.html">LOGIN</a>
+                                	<a href onclick="fb_login(); return false;">FB LOGIN</a>
+                                <?php }else{ ?>
+						        	<a href="/index.php?m=user&c=index&a=logout" class="login-logout">LOGOUT</a>
+						        <?php } ?>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="m-col-6 last">
+                    <div style="display:none;" class="company-info">
+                        <div class="adr">
+                            Street
+                            <br>Canada</div>
+                        <a class="tel" href="javascript:;">123-456-789</a>
+                    </div>
+
+   
+                </div>
+            </div>
+            <!-- END col-12 -->
+        </div>
+        <!-- END row -->
+    </div>
+</nav>
+
+<div id="sidebar-cart">
+    <div class="sidebar-content">
+        <div class="sidebar-links">
+            <div id="cart-count-sidebar">
+                <span class="cart-count">
+                    Items
+                    <!--<span class="count">1</span> -->
+                </span>
+            </div>
+            <?php if(!$user){ ?>
+            <a href="/login.html" class="login-logout">
+                <i class="fa fa-user"></i>
+                Sign in
+            </a>
+            <?php }else{ ?>
+            <a href="/index.php?m=user&c=index&a=logout" class="login-logout">
+                logout
+            </a>
+            <?php } ?>
+        </div>
+
+        <h4>
+            <a href="/cart">My cart</a>
+        </h4>
+
+        <div id="sidebar-cart-items">
+            <?php foreach((array)$cart_data as $v){ ?>
+            <div class="cart-product">
+                <a href="#" class="cart-product-thumb">
+                    <img width="150" height="194" src="http://img1.atido.com/<?php echo $v['imgname']; ?>" class="attachment-shop_thumbnail wp-post-image" alt="<?php echo $v['desc']; ?>" />
+                </a>
+
+                <div class="cart-product-meta">
+                    <a class="cart-product-title" href="/shop/product/<?php echo $v['url_name']; ?>/"><?php echo $v['goods_name']; ?></a>
+                    <span class="cart-product-price">
+                        <span class="label">Price:</span>
+                        <span class="amount">&#36;<?php echo $v['price']; ?></span>
+                    </span>
+                    <span class="cart-product-quantity">
+                        <span class="label">Quantity:</span>
+                        <?php echo $v['quantity']; ?>
+                    </span>
+                    <a href="#" class="cart-product-remove">
+                        Remove
+                        <i class="simple-lineicon simple-lineicon-close"></i>
+                        <div class="id" style="display:none;" ><?php echo $v['id']; ?></div>
+                        <div class="shopquantity" style="display: none;"><?php echo $v['quantity']; ?></div>
+                    </a>
+                </div>
+            </div>
+            <?php } ?>
+
+            <div class="cart-subtotal">
+                <span>Subtotal:</span>
+                <span class="cart-subtotal-price">
+                    <span class="amount">&#36;<?php echo $cart_sum['price']; ?></span>
+                </span>
+            </div>
+
+            <a href="/checkout" class="view-checkout">Proceed to Checkout</a>
+        </div>
+        <div class="no-products" style="display: none;">
+            <span>No products in the shopping bag.</span>
+        </div>
+    </div>
+</div>
+
+ 

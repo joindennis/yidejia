@@ -1,0 +1,102 @@
+<?php 
+
+ 
+
+foreach ($result as $key => $value) {
+   
+ 
+	
+$ts = $result[$key]['info']['time'];
+$date = new DateTime("@$ts");
+$human_date = $date->format(' Y-m-d H:i:s');
+
+$full_name = ($result[$key]["First_name"]?$result[$key]["First_name"]:"No").' '.($result[$key]["Last_name"]?$result[$key]["Last_name"]:" name");
+$email = '<a href="mailto:'.$result[$key]['Email'].'">'.$result[$key]['Email'].'</a>';
+
+
+$timeZone = $result[$key]['timezone'];
+
+if (!$timeZone) {
+	$timeZone = 'Time Zone not provided';
+}
+
+else {
+	$timeZone = 'Time Zone: '.$timeZone;
+}
+
+
+
+$shared = $result[$key]['info']['shared'];
+
+if ($shared ==1){
+	$shared = '<span class="notification_success">Shared</span>';
+}
+else {
+	$shared = '<span class="notification_error">Not shared</span>';
+}
+
+
+
+$liked = $result[$key]['info']['liked'];
+
+if ($liked == 1){
+	$liked = '<span class="notification_success">Liked</span>';
+}
+else {
+	$liked = '<span class="notification_error">Not liked</span>';
+}
+
+
+
+
+
+$gender = $result[$key]['gender'];
+
+$fb_id = $result[$key]['fb_id'];
+
+
+$address1 = $result[$key]['info']['Address1'];
+$address2 = $result[$key]['info']['Address2'];
+
+
+if (!$address2) {
+	 $address2 = '<span class="notification_error">Not provided</span>';
+}
+
+
+
+
+
+
+$area = $result[$key]['info']['City']. ', '.$result[$key]['info']['State']. ', '.$result[$key]['info']['Country'];
+
+$zip = $result[$key]['info']['Zip'];
+
+
+ echo '
+     <div class="facebookResultItem">
+     <div class="facebookResultDate">'.$human_date.'</div><div class="facebookResultTimeZone">'.$timeZone.'</div>
+     
+     <div class="facebookResultShare">FB: '.$shared.'</div>
+     <div class="facebookResultLike">FB: '.$liked.'</div>
+     <div class="facebookResultNLE clear"><div class="fb_link_profile"><a href="https://www.facebook.com/app_scoped_user_id/'.$fb_id.'" target="_blank"><img class="facebook_user_result_imageprofile"  src="//graph.facebook.com/'.$fb_id.'/picture?type=large">'.$full_name.'<span class="notification_gender">'.$gender.'</span></a></div>'.$email.'</div>
+    
+     <div class="facebookResultAddress"><strong>Address</strong>: '.$address1.'</div>
+     <div class="facebookResultAddress"><strong>Address 2</strong>: '.$address2.'</div>
+     <div class="facebookResultArea"><strong>Area: </strong> '.$area.'</div>
+     <div class="facebookResultZip"><strong>ZIP: </strong> '.$zip.'</div>
+     
+     
+     
+     
+ 	</div>';
+
+
+echo '<div class="clear"></div>';
+ 
+ }
+
+ 
+
+
+?>

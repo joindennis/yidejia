@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="top">
+        <nav>
+            <b>&#xe63a;</b>
+            <a href="">My Account</a>
+            <i>&gt;</i>
+            <em>My Orders</em>
+        </nav>
+    </div>
+    <div class="left">
+        <nav class="l_myAccount">
+            <h4>My Account</h4>
+            <a class="s_current" href="">
+                <i>&gt;</i>
+                <b>My Orders</b>
+            </a>
+            <a href="">
+                <i>&gt;</i>
+                <b>Consulting</b>
+            </a>
+        </nav>
+    </div>
+    <div class="main">
+        <div class="m_functionBar">
+            <section>
+                <a href="">Address</a>
+                <a href="">My Paypal</a>
+            </section>
+            <nav class="l_orderSort">
+                <?php if((int)$_GET['status']==0){ ?>
+                <b>&#xe63b;</b>
+                <?php } ?>
+                <a class="<?php echo (int)$_GET['status']==0?'s_current':''; ?>" href="/index.php?m=ucenter&c=order&a=index">All Orders <em>(5)</em></a>
+                <i>|</i>
+                <?php if((int)$_GET['status']==1){ ?>
+                <b>&#xe63b;</b>
+                <?php } ?>
+                <a href="/index.php?m=ucenter&c=order&a=index&status=1" class="<?php echo $_GET['status']==1?'s_current':''; ?>" >Awaiting Payment <em>(5)</em></a>
+                <i>|</i>
+                <?php if((int)$_GET['status']==2){ ?>
+                <b>&#xe63b;</b>
+                <?php } ?>
+                <a href="/index.php?m=ucenter&c=order&a=index&status=2" class="<?php echo $_GET['status']==2?'s_current':''; ?>" >Awaiting Shipment <em>(5)</em></a>
+                <i>|</i>
+                <?php if((int)$_GET['status']==3){ ?>
+                <b>&#xe63b;</b>
+                <?php } ?>
+                <a href="/index.php?m=ucenter&c=order&a=index&status=3" class="<?php echo $_GET['status']==3?'s_current':''; ?>" >Unconfirmed Delivery <em>(5)</em></a>
+            </nav>
+            <form action="">
+                <input type="text" /><button type="submit">Order Search</button>
+            </form>
+        </div>
+        <table class="t_orderTable">
+            <thead>
+                <tr>
+                    <th width="278">Products</th>
+                    <th width="90">Unit Price ($)</th>
+                    <th width="70">Quantity</th>
+                    <th width="100">Operation</th>
+                    <th width="130">Amount ($)</th>
+                    <th width="150">
+                        <select class="J_orderStatus">
+                            <option value="/index.php?m=ucenter&c=order&a=index">Status</option>
+                            <option <?php echo (int)$_GET['status']==1?"selected":""; ?> value="/index.php?m=ucenter&c=order&a=index&status=1">Awaiting Payment</option>
+                            <option <?php echo (int)$_GET['status']==2?"selected":""; ?> value="/index.php?m=ucenter&c=order&a=index&status=2">Confirmed Payment</option>
+                            <option <?php echo (int)$_GET['status']==3?"selected":""; ?> value="/index.php?m=ucenter&c=order&a=index&status=3">Confirmed Shipment</option>
+                            <option <?php echo (int)$_GET['status']==4?"selected":""; ?> value="/index.php?m=ucenter&c=order&a=index&status=4">Completed</option>
+                            <option <?php echo (int)$_GET['status']==5?"selected":""; ?> value="/index.php?m=ucenter&c=order&a=index&status=5">Cancel Order</option>
+                        </select>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach((array)$data as $v){ ?>
+                <tr>
+                    <td class="s_colspan6" colspan="6">
+                        <span class="p_orderNumber"><b><?php echo $v['the_date']; ?></b> Order No. : <?php echo $v['order_code']; ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="s_name">
+                        <a class="p_imgText" href="" target="_blank">
+                            <img src="http://img1.atido.com/8/2014/07/02/ad1d022312dc.jpg!100" alt="">
+                            <span>Nutrition GRAIN DIETARY FIBER TABLETTING CANDY</span>
+                        </a>
+                    </td>
+                    <td>$<?php echo $v['the_amount']; ?></td>
+                    <td>1</td>
+                    <td>
+                        <a class="e_operate" href="javascript:;">Payment</a>
+                        <a class="e_operate" href="javascript:;">Cancel</a>
+                    </td>
+                    <td><?php echo $v['the_amount']; ?></td>
+                    <td>
+                        <div>Awaiting Payment</div>
+                        <a href="/index.php?m=ucenter&c=order&a=orderInfoPay&code=<?php echo $v['order_code']; ?>" >View Detail</a>
+                    </td>
+                </tr>
+                <?php } ?>
+                <tr>
+                    <td colspan="6" >
+                        <?php echo $pager; ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="c_page"></div>
+    </div>
+</div>

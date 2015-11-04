@@ -1,0 +1,62 @@
+
+    <?php 
+   //echo "<pre>";
+    //print_r($points);
+    //echo "</pre>";
+    
+    
+    
+    $goods_name = $goods['response']['goods_name']; 
+    $goods_desc = $goods['response']['goods_desc'];
+    $goods_sale_price = $goods['response']['sale_price'];
+    $goods_id = $goods['response']['goods_id'];
+    $goods_image = $goods['response']['imgname'];
+    
+    $goods_points_price = $points['response']['points'];
+    
+    
+    			// get url_name
+ 				$urlName= $goods['response']['url_name']; 
+ 						   
+ 				$urlExplode = explode("/", $urlName);
+ 	
+ 				// get url type
+ 				$urlType= $goods['response']['type'];
+ 				
+ 				$url_to_goods = getProcutUrl($urlExplode[0],$urlType);
+    
+    
+    
+    
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+		
+    for ($i = 0; $i < 7; $i++) {
+       	$hash .= $characters[rand(0, $charactersLength - 1)];
+    	}
+ 
+    
+    
+    ?>
+    
+
+<div class="redeem_cart-product <?php echo $hash; ?>">
+                <a class="redeem_cart-product-thumb" href="#">
+                    <img width="150" height="194" alt="<?php echo $goods_desc; ?>" class="attachment-shop_thumbnail wp-post-image" src="http://img1.atido.com/<?php echo $goods_image; ?>">
+                </a>
+
+                <div class="redeem_cart-product-meta">
+                    <a href="<?php echo $url_to_goods; ?>" class="redeem_cart-product-title" target="_blank"><?php echo $goods_name; ?></a>
+                    <span class="redeem_cart-product-price">
+                        <span class="label">Price:</span>
+                        <span class="amount_points_per_product"><?php echo $goods_points_price; ?></span> points
+                    </span>
+                 
+                
+                </div>
+            </div>
+
+
+
+

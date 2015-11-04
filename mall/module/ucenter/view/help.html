@@ -1,0 +1,82 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+      
+      
+        
+      
+<!-- BEGIN #page -->
+<div class="container">
+            	
+            	
+     <div class="row ucenter">
+            		
+          
+      <!-- including left menu -->  		
+      <?php include ("ucenter_menu.html"); ?>
+            		
+            		
+         
+      <!-- main content -->
+       <div class="cont lm-col-9  paddingTop40">
+
+       	
+       	
+       <div class="user_center_header">
+       	<a name="chapter"></a> 
+       <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+    
+    <div class="tabsAjax">
+            				
+    <a class="tabAjax mobile_tab" href="/index.php?m=ucenter&c=index&a=help" style="background-color:#FFF;">Feedback</a> <a class="tabAjax mobile_tab" onclick="LoadHistory(); return false;">Messages</a> <a class="tabAjax mobile_tab" onclick="SystemMessages(); return false;">Notifications</a>
+            				
+    </div>
+      
+      
+       </div>
+            			 
+            			
+            			
+       </div>
+            		
+            		
+       <div class="cont lm-col-9  paddingTop40">
+            
+  
+ <div id="myHelp">
+ 	<?php echo $user_form_message; ?>
+ 	<form action="" method="post" name="user_help" id="user_help">
+ 		
+ 		<span class="legend">Topic:</span> <input type="text"  name="user_topic" id="user_topic">
+ 		<span class="legend">Product:</span> <input type="text"  name="user_product" id="user_product" value=""/> 
+		<span class="legend">Phone:</span> <input type="text"  name="user_phone" id="user_phone" value="<?php echo $userInfo['phone']; ?>"/> 	 
+		
+		
+		
+		<span class="legend">Message:</span> 
+		
+		<textarea id="user_message" name="user_message"  maxlength="2000"></textarea>
+		<small>Max. 2000 chars</small> 		
+ 		
+ 		<input type="hidden" value="1" name="user_help_status"/>
+ 		<input type="submit" value="Send message" />
+ 		<small>Your message will be sent to<br> our system</small> 	
+ 	</form>
+ 	
+ 	
+ </div> 
+   
+            		 
+  	   </div>
+            		
+            		
+		
+            		
+     		
+      
+       </div>
+            	
+       </div>
+       <!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>

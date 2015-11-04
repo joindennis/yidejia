@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="no-js lt-ie9 yes-responsive lol-sticky-header-yes header-transparent  blog-classic " lang="en-US"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js yes-responsive lol-sticky-header-yes header-transparent  blog-classic page-header-dark" lang="en-US"> <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <?php include(TEMPLATE_DIR.'ca_seo.html'); ?>
+        <?php include(TEMPLATE_DIR.'ca_head.html'); ?>
+        <script src="../../js/ca/ucenter/ajax_data.js"></script>
+    </head>
+
+    <body class="page page-id-22 page-template-default woocommerce-cart woocommerce-page">
+
+        <!--  BEGIN sidebar -->
+        <?php include(TEMPLATE_DIR.'sidebar.html'); ?>
+        <!--  END sidebar -->
+
+        <!-- BEGIN wrap -->
+        <div id="wrap">
+            <?php include(TEMPLATE_DIR.'ca_header.html'); ?>
+            <div id="page-title-wrap" style="background-image:url(<?php echo $columns['img']?getProductImgUrl($columns['img']):'/images/ca/shop_thumb.jpg'; ?>);background-color:#a8a69b;" class="header-light has-thumb">
+                <div class="page-title">
+                    <h1>Redeem Cart</h1>
+                    <div class="meta-wrap"><?php echo $columns['title']?$columns['title']:'Please to set'; ?></div>
+                </div>
+            </div>
+
+            <div class="container crumbs-wrap">
+                <!-- BEGIN row -->
+                <div class="row">
+                    <!-- BEGIN col-12 -->
+                    <div class="lm-col-12">
+
+                        <nav class="crumbs">
+                            <span>You are here:</span>
+                            <a class="home" href="#">Home</a>
+                            /
+                            <span>Redeem Cart</span>
+                        </nav>
+                    </div>
+                    <!-- END col-12 --> </div>
+                <!-- END row --> </div>
+
+            <!-- BEGIN #page -->
+            
+            
+            
+            <div class="hfeed " id="page">
+
+                <!-- BEGIN #main -->
+                <div id="main">
+
+                    <!-- BEGIN #content -->
+                    <div role="main" class="" id="content">
+                    	
+                    	
+                        <!-- BEGIN #post -->
+                        <article class="post-22 page type-page status-publish has-post-thumbnail hentry" id="post-22">
+
+                            <div class="container">
+                                <!-- BEGIN row -->
+                                <div class="row">
+                                	
+                                	
+                    	      
+                                    <!-- BEGIN col-12 -->
+                                    <div class="lm-col-12">
+                 
+                         
+      
+
+                                        <!-- BEGIN .entry-conent -->
+                                        <div class="entry-content">
+                                            <div class="woocommerce">
+                                                <form id="cartForm" method="post" action="/index.php?m=index&c=cart&a=redeemCheckout">
+
+                                                    <table cellspacing="0" class="shop_table cart">
+                                                        <thead>
+                                                            <tr>
+                                                              
+                                                                <th class="product-thumbnail">&nbsp;</th>
+                                                                <th class="product-name">Product</th>
+                                                          
+                                                                 
+                                                                <th class="product-remove">&nbsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        
+                                            
+                                                   <?php
+                                                   
+                                                   foreach ($urlList as $key => $value) {
+                                                   
+                                                   $total_points_amount += $pointsList[$key]['points'];
+                                                   	
+                                                   }
+                                                   
+                                                   
+                                                   
+                                                   
+                                                
+                                                   foreach ($urlList as $key => $value) {
+                                                       
+                                                  	
+									 				$urlName= $urlList[$key]['url_name']; 
+									 				$urlExplode = explode("/", $urlName);
+									 	
+									 				$urlType= $urlList[$key]['type'];
+									 				
+									 				$product_of_url = getProcutUrl($urlExplode[0],$urlType);
+									                                                    
+                                                  
+                                                          echo '
+                                                           <tr class="cart_item">
+
+                                                            
+
+                                                                <td class="product-thumbnail">
+                                                                    
+                                                                        <a href="'.$product_of_url.'" target="_blank"><img width="150" height="194" alt="'.$urlList[$key]['desc'].'" src="http://img1.atido.com/'.$urlList[$key]['imgname'].'" class="mobile_image"></a> 
+                                                                </td>
+
+                                                                <td class="product-name">
+                                                                    <img width="150" height="194" alt="'.$urlList[$key]['desc'].'" src="http://img1.atido.com/'.$urlList[$key]['imgname'].'" class="desktop_image_none mobile_image_preview">
+                                                                    <div><a href="'.$product_of_url.'" target="_blank">'.$urlList[$key]['goods_name'].'</a></div>
+                                                                    <div class="product-price">
+                                                                        <span class="amount">'.$pointsList[$key]['points'].' points</span>
+                                                                    </div>
+                                                                </td>
+ 
+
+                                                            
+                                                                
+                                                                    <td class="product-remove">
+                                                                 <a href="#" onclick="return false;">
+                                                                 	<span class="redeem_remove_button" data-product_id="'.$urlList[$key]['goods_id'].'" >   <i class="simple-lineicon simple-lineicon-close"></i></span>
+                                                                 </a>
+                                                                    
+                                                                    
+                                                                    
+                                                                </td>
+                                                                
+                                                                
+                                                                
+                                                            </tr>
+                                                                         
+                                                          
+                                                          
+                                                          
+                                                          '; 
+                                                       } 	
+                                                        	
+                                                        	
+                                                     ?>   	
+                                                        
+                                           
+                                                        
+                                                        	                                              
+                                                      </tbody>
+                                                    </table>
+
+                                                    <div class="actions">
+
+                                                        <div class="row">
+
+                                                            <div class="lm-col-6">
+                                                                <div class="coupon"></div>
+                                                            </div>
+
+                                                            <div class="lm-col-6 cart-buttons">
+                                                                
+                                                                <input type="submit" value="Proceed to checkout" class="checkout-button button alt wc-forward">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+
+                                                
+                                            </div>
+                                        </div>
+                                        <!-- END .entry-conent -->
+                                    </div>
+                                    <!-- END col-12 -->
+                                </div>
+                                <!-- END row -->
+                            </div>
+                        </article>
+                        <!-- END #post -->
+                    </div>
+                    <!-- END #content -->
+                </div>
+                <!-- END #main -->
+            </div>
+            
+            
+            
+            <!-- END #page -->
+            <!-- BEGIN #footer -->
+            <?php include(TEMPLATE_DIR.'ca_footer.html'); ?>
+            <!-- END #footer-bottom -->
+        </div>
+        <!-- END wrap -->
+        <script src="/js/ca/country-select.min.js"></script>
+        <script src="/js/ca/cart.min.js"></script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                var $updateCart = $('input[name="update_cart"]'),
+                    $checkout = $('input[name="checkout"]'),
+                    $cartForm = $('#cartForm');
+
+                $updateCart.add($checkout).bind('click', function(event) {
+                    var $_this = $(this),
+                        link = $_this.data('href');
+
+                    $cartForm.attr('action', link);
+                    // submit all the thing
+                    $cartForm.submit();
+                });
+            });
+        </script>
+    </body>
+</html>

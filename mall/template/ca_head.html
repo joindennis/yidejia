@@ -1,0 +1,73 @@
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script>document.documentElement.className += " js";</script>
+    <script>
+        var yith_wcwl_plugin_ajax_web_url = '#';
+        var login_redirect_url = '/';
+    </script>
+    <link rel="stylesheet" href="/css/ca/fonts.css">
+    <link rel="stylesheet" href="/css/ca/all.css">
+    <link rel="stylesheet" href="/css/ca/base.css">
+    <link rel="stylesheet" href="/css/ca/woocommerce.css">
+    <link rel="stylesheet" href="/css/ca/facebook/facebook.css">
+    <!--[if lt IE 9]>
+    <link rel='stylesheet' id='ie8-css-css' href='/css/ca/ie8.css?ver=4.0.1' type='text/css' media='all' />
+    <![endif]-->
+    
+    <script src='/js/ca/jquery.js?ver=1.11.1'></script>
+    <script src='/js/ca/jquery-migrate.min.js?ver=1.2.1'></script>
+    <script src='/js/ca/modernizr.js?ver=4.0.1'></script>
+    
+    
+    <link rel="stylesheet" href="/css/ca/mobile.css">
+    <link rel="stylesheet" href="/css/ca/mobile_ucenter.css">
+    
+    
+    
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+ 
+
+    <script>
+    // (function(url){
+    // if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+    // var wfscr = document.createElement('script');
+    // wfscr.type = 'text/javascript';
+    // wfscr.async = true;
+    // wfscr.src = url + '&r=' + Math.random();
+    // (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+    // })('#');
+    </script>
+    <!--[if lt IE 9]>
+    <script src="/js/ca/ie8.js?ver=1.0" type="text/javascript"></script>
+    <link href="/js/ca/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+    <link href="/images/ca/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+    <script src="/js/ca/respond.proxy.js"></script>
+    <![endif]-->
+    
+    <script>
+    	jQuery(document).ready(function() {
+    		if (window.location.protocol != "https:") {
+    			window.location.href = "https:" + window.location.host + window.location.pathname;
+    		}
+    	});
+    	
+    	window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '1552605548342388',
+				cookie     : true,  // enable cookies to allow the server to access the session
+				xfbml      : true,  // parse social plugins on this page
+				version    : 'v2.2' // use version 2.2
+			});
+			
+	
+		};
+		
+
+		
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+    </script>

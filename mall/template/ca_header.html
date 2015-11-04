@@ -1,0 +1,243 @@
+<header id="branding" class="light" data-style-start="light" data-style-end="light" data-border="" role="banner" style="padding:0;">
+	
+	
+	
+	
+	<?php 
+	if(!$user) {echo '';}
+	else {
+		echo '<div class="top_black"><div class="container"><a href="/index.php?m=ucenter&c=index&a=home" class="top_ucenter_menu">My Account</a><a href="/index.php?m=ucenter&c=index&a=points" class="top_ucenter_menu">Redeem</a><a href="/index.php?m=ucenter&c=index&a=help" class="top_ucenter_menu  float_right help"><i class="fa fa-question-circle"></i></a><a href="/index.php?m=ucenter&c=index&a=wishList" class="top_ucenter_menu float_right">Wishlist</a><a href="/press.html" class="top_ucenter_menu float_right">Blog</a></div></div>';
+	}
+	?>
+	
+	<div id="fb-root"></div>
+  
+    <div class="container">
+    	
+    	
+    	<div id="redeemCart">
+    		<div class="redeemHeader">REDEEM CART</div>
+    		<div class="redeemBody"></div>
+    		<div class="redeemFooter"><a class="redeem_cart_checkout" href="/index.php?m=ucenter&c=index&a=redeemInfo">REVIEW / MANAGE CART</a></div>
+    		<div class="redeemClose"><i class="simple-lineicon simple-lineicon-close"></i></div>
+    		
+    		
+    		
+    	</div>
+    	
+    	
+    	
+        <!-- BEGIN row -->
+        <div class="row">
+            <!-- BEGIN col-12 -->
+            <div class="lm-col-12">
+                <!-- BEGIN #logo -->
+                <div id="logo">
+                    <a href="/" title="YIDEJIA">
+                        <img src="/images/ca/logo.png" class="" alt="YIDEJIA"><span></span>
+                    </a>
+                </div>
+                <!-- END #logo -->
+                <div class="cart-yes search-yes">
+                    <a href="#" id="mobile-menu-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="44px" height="34px" viewBox="0 0 44 34" enable-background="new 0 0 44 34" xml:space="preserve">
+                            <rect x="11" y="16" width="22" height="2" class="style0"/>
+                            <rect x="11" y="10" width="22" height="2" class="style0"/>
+                            <rect x="11" y="22" width="22" height="2" class="style0"/>
+                        </svg>
+                    </a>
+
+                    <!-- BEGIN nav-menu -->
+                    <nav id="nav-menu" role="navigation">
+                        <h3 class="assistive-text">Main menu</h3>
+                        <div class="skip-link">
+                            <a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a>
+                        </div>
+                        <div class="skip-link">
+                            <a class="assistive-text" href="#sidebar" title="Skip to secondary content">Skip to secondary content</a>
+                        </div>
+                        <div class="menu-navigation-container">
+                            <ul id="menu-navigation" class="sf-menu">
+                                <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-11 menu-item-28 <?php echo in_array(strtolower($_GET['category1']),array('skincare','clothing','makeup'))?'':'current-menu-item'; ?>">
+                                    <a href="/">Home</a>
+                                </li>
+                                <li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-26 megamenu <?php echo strtolower($_GET['category1'])=='skincare'?'current-menu-item':''; ?>">
+                                    <a href="/skincare.html">SKINCARE</a>
+                                    <div class='megamenu_wrap column-items5'>
+
+                                        <ul class="sub-menu">
+                                            <?php for($i=0;$i<10;$i++){ ?>
+                                            <li id="menu-item-240" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-parent-item menu-item-240">
+                                                <!--                                                <span class="megamenu-section-title">Women</span>-->
+                                                <ul class="sub-menu">
+                                                    <?php for($j=$i*2;$j<$i*2+2;$j++){ ?>
+                                                    <?php if($category['skincare'][$j]){ ?>
+                                                    <li id="menu-item-242" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-242">
+                                                        <a href="/skincare/<?php echo $category['skincare'][$j]['url_name']; ?>.html"><?php echo $category['skincare'][$j]['name']; ?></a>
+                                                    </li>
+                                                    <?php }else{ ?>
+                                                    <?php break 2;?>
+                                                    <?php } ?>
+                                                    <?php } ?>
+                                                </ul>
+                                            </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </li>
+                         
+                                <li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-26 megamenu <?php echo strtolower($_GET['category1'])=='makeup'?'current-menu-item':''; ?>">
+                                    <a href="/makeup.html">MAKEUP</a>
+                                    <div class='megamenu_wrap column-items5'>
+
+                                        <ul class="sub-menu">
+                                            <?php for($i=0;$i<10;$i++){ ?>
+                                            <li id="menu-item-240" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-parent-item menu-item-240">
+                                                <!--                                                <span class="megamenu-section-title">Women</span>-->
+                                                <ul class="sub-menu">
+                                                    <?php for($j=$i*2;$j<$i*2+2;$j++){ ?>
+                                                    <?php if($category['makeup'][$j]){ ?>
+                                                    <li id="menu-item-242" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-242">
+                                                        <a href="/makeup/<?php echo $category['makeup'][$j]['url_name']; ?>.html"><?php echo $category['makeup'][$j]['name']; ?></a>
+                                                    </li>
+                                                    <?php }else{ ?>
+                                                    <?php break 2;?>
+                                                    <?php } ?>
+                                                    <?php } ?>
+                                                </ul>
+                                            </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </li>
+                                
+                                
+                                       <li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-26 megamenu <?php echo strtolower($_GET['category1'])=='clothing'?'current-menu-item':''; ?>">
+                                    <a href="/clothing.html">CLOTHING</a>
+                                    <div class='megamenu_wrap column-items5'>
+
+                                        <ul class="sub-menu">
+                                            <?php for($i=0;$i<10;$i++){ ?>
+                                            <li id="menu-item-240" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-parent-item menu-item-240">
+                                                <!--                                                <span class="megamenu-section-title">Women</span>-->
+                                                <ul class="sub-menu">
+                                                    <?php for($j=$i*2;$j<$i*2+2;$j++){ ?>
+                                                    <?php if($category['clothing'][$j]){ ?>
+                                                    <li id="menu-item-242" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-242">
+                                                        <a href="/clothing/<?php echo $category['clothing'][$j]['url_name']; ?>.html"><?php echo $category['clothing'][$j]['name']; ?></a>
+                                                    </li>
+                                                    <?php }else{ ?>
+                                                    <?php break 2;?>
+                                                    <?php } ?>
+                                                    <?php } ?>
+                                                </ul>
+                                            </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </li>
+                                
+                                
+                                
+                                
+                                <li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-parent-item menu-item-26 megamenu <?php echo strtolower($_GET['category1'])=='nutrition'?'current-menu-item':''; ?>">
+                                    <a href="/skin">SKINTEST</a>
+                                </li>
+                                <?php if(!$user){ ?>
+                                <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-11 menu-item-28">
+                                    <a class="s_fz14 s_mr0 facebook_button_fix" id="facebook_button" href onclick="fb_login(); return false;">Login</a>
+                                
+                                </li>
+                                <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-11 menu-item-28">
+                                    <a class="s_fz14 s_mr0" href="/login.html" style="margin-left:5px;">Sign in</a>
+                                    
+                                    <a class="s_fz13 s_ml0" href="/register.html">Register</a>
+                                    
+                                    <form class="fb_login" action="/index.php?m=user&c=index&a=FBlogin" method="POST">
+                                		<input type="hidden" name="fb_login" value="0">
+                                		<input type="hidden" name="First_name" value="">
+                                		<input type="hidden" name="Last_name" value="">
+                                		<input type="hidden" name="Email" value="">
+                                		<input type="hidden" name="fb_id" value="">
+                                		<input type="hidden" name="gender" value="">
+                                		<input type="hidden" name="locale" value="">
+                                		<input type="hidden" name="timezone" value="">
+                                		<input type="hidden" name="ReturnUrl" value="">
+                                	</form>
+                                    <script>
+                                		function fb_login() {
+                                			FB.login(function(response) {
+                                				if (response.status === 'connected') {
+                                					FB.api('/me', function(response) {
+                                						var f = jQuery("form.fb_login");
+                                						f.children("[name=fb_login]").attr("value", "1");
+                                						f.children("[name=First_name]").attr("value", response.first_name);
+                                						f.children("[name=Last_name]").attr("value", response.last_name);
+                                						f.children("[name=Email]").attr("value", response.email);
+                                						f.children("[name=fb_id]").attr("value", response.id);
+                                						f.children("[name=gender]").attr("value", response.gender);
+                                						f.children("[name=locale]").attr("value", response.locale);
+                                						f.children("[name=timezone]").attr("value", response.timezone);
+                                						f.children("[name=ReturnUrl]").attr("value", window.location.href);
+                                						f.submit();
+                                					});
+                                				}
+                                			}, {scope:'public_profile, email'});
+                                		}
+                               	
+                                		
+                                		
+                                		
+                                	</script>
+                                </li>
+                                <?php }else{ ?>
+                                <li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-11 menu-item-28">
+                                    <a class="s_fz14" href="/index.php?m=user&c=index&a=logout">Logout</a>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <a href="#" id="icon-search-btn">
+                        <i class="fa fa-search"></i>
+                    </a>
+
+                    <div class="header-search">
+                    	
+                   
+                    
+                    	
+                        <form role="search" method="get" class="searchbox" action="https://www.yidejia.ca/index.php?m=index&c=index&a=search&category1=makeup&s=mascara">
+                            <i class="fa fa-search"></i>
+                            <label class="screen-reader-text" for="s">Search for:</label>
+                            <input type="text" value="<?php echo $_GET['s']; ?>" name="s" id="s" placeholder="Search for products" />
+                            <input type="hidden"  value="product" />
+                        </form>
+                    </div>
+
+                    <div id="icon-cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="cart-icon" width="28px" height="32px" viewBox="0 0 28 32" enable-background="new 0 0 28 32" xml:space="preserve">
+                            <path class="header-cart-svg" d="M25.996 8.91C25.949 8.4 25.5 8 25 8h-5V6c0-3.309-2.691-6-6-6c-3.309 0-6 2.691-6 6v2H3 C2.482 8 2.1 8.4 2 8.91l-2 22c-0.025 0.3 0.1 0.6 0.3 0.764C0.451 31.9 0.7 32 1 32h26 c0.281 0 0.549-0.118 0.738-0.326c0.188-0.207 0.283-0.484 0.258-0.764L25.996 8.91z M10 6c0-2.206 1.795-4 4-4s4 1.8 4 4v2h-8V6z M24.087 10l1.817 20H2.096l1.817-20"/>
+                        </svg>
+
+                        <div id="cart-count-header">
+                            <?php
+                            if(!$user)
+                            {echo '';}
+                            else {
+                            	?>
+                            <span class="cart-count"><?php echo $cart_sum['total']; ?></span>	
+                            	
+                            	<?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END col-12 -->
+        </div>
+        <!-- END row -->
+    </div>
+</header>

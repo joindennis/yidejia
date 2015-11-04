@@ -1,0 +1,65 @@
+<?php 
+
+ 
+
+foreach ($dataSkinTestResults as $key => $value) {
+   
+ 
+	
+$ts = $dataSkinTestResults[$key]['created'];
+$date = new DateTime("@$ts");
+$human_date = $date->format(' Y-m-d H:i:s');
+
+$full_name = ($dataSkinTestResults[$key]["name"]?$dataSkinTestResults[$key]["name"]:"No").' '.($dataSkinTestResults[$key]["last_name"]?$dataSkinTestResults[$key]["last_name"]:" name");
+
+$email = '<br>'.$dataSkinTestResults[$key]['email'];
+$phone = $dataSkinTestResults[$key]['phone'];
+
+if ($phone == ''){
+	$phone = 'No phone provided';
+}
+else {
+	$phone = 'Phone: '.$phone;
+}
+
+if ($dataSkinTestResults[$key]["cpsid"]){
+	$cpsid = '<span class="cpsid_success">CPSID= '.$dataSkinTestResults[$key]["cpsid"].'</span>';
+}
+	else {
+	$cpsid = '<span class="cpsid_error">No CPSID</span>';	
+	}
+	
+	
+ 
+ 
+	$answer_new = 
+	'<span class="question">Q1</span>'.$dataSkinTestResults[$key]["question_1"].'<br>'.
+	'<span class="question">Q2</span>'.$dataSkinTestResults[$key]["question_2"].'<br>'.
+	'<span class="question">Q3</span>'.$dataSkinTestResults[$key]["question_3"].'<br>'.
+	'<span class="question">Q4</span>'.$dataSkinTestResults[$key]["question_4"].'<br>'.
+	'<span class="question">Q5</span>'.$dataSkinTestResults[$key]["question_5"].'<br>'.
+	'<span class="question">Q6</span>'.$dataSkinTestResults[$key]["question_6"].'<br>'.
+	'<span class="question">Q7</span>'.$dataSkinTestResults[$key]["question_7"].'<br>'.
+	'<span class="question">Q8</span>'.$dataSkinTestResults[$key]["question_8"].'<br>'.
+	'<span class="question">Q9</span>'.$dataSkinTestResults[$key]["question_9"].'<br>'.
+	'<span class="question">Q10</span>'.$dataSkinTestResults[$key]["question_10"];
+	
+	
+   
+     echo '
+     <div class="helpMessageItem">
+     <div class="helpMessageDate">'.$human_date.'</div>
+     
+     <div class="skinResultsMessageTopic">
+     	'.$full_name.'
+     	<a href="mailto:'.$dataSkinTestResults[$key]['email'].'">
+     	'.$email.'</a><span class="cpsid_box"> '.$cpsid.'</span>
+     	<br>'.$phone.'
+     	</div>
+     <div class="helpMessageMessage">'.$answer_new.'</div></div>';
+ }
+
+ 
+
+
+?>

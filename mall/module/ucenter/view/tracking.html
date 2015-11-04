@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9 yes-responsive lol-sticky-header-yes header-no-transparent  blog-classic " lang="en-US">
+        <![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js yes-responsive lol-sticky-header-yes header-no-transparent  blog-classic " lang="en-US">
+    <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+        <?php include(TEMPLATE_DIR.'ca_seo.html'); ?>
+        <?php include(TEMPLATE_DIR.'ca_head.html'); ?>
+    </head>
+
+    <body class="page page-id-260 page-template-default">
+
+        <!--  BEGIN sidebar -->
+        <?php include(TEMPLATE_DIR.'sidebar.html'); ?>
+        <!--  END sidebar -->
+
+        <!-- BEGIN wrap -->
+        <div id="wrap">
+
+            <!-- BEGIN branding -->
+            <?php include(TEMPLATE_DIR.'ca_header.html'); ?>
+            <!-- END branding -->
+
+            <div id="page-title-wrap" style="background-color:#f6f6f6;" class="header-dark ">
+
+                <div class="page-title">
+                    <h1>Order Tracking</h1>
+
+                </div>
+
+            </div>
+
+            <div class="container crumbs-wrap">
+                <!-- BEGIN row -->
+                <div class="row">
+                    <!-- BEGIN col-12 -->
+                    <div class="lm-col-12">
+
+                        <nav class="crumbs">
+                            <span>You are here:</span>
+                            <a class="home" href="/">Home</a>
+                            /
+                            <span>Order tracking</span>
+                        </nav>
+                    </div>
+                    <!-- END col-12 -->
+                </div>
+                <!-- END row -->
+            </div>
+
+            <!-- BEGIN #page -->
+            <div id="page" class="hfeed " >
+
+                <!-- BEGIN #main -->
+                <div id="main">
+
+                    <!-- BEGIN #content -->
+                    <div id="content" class="" role="main">
+
+                        <!-- BEGIN #post -->
+                        <article id="post-260" class="post-260 page type-page status-publish hentry">
+
+                            <div class="container">
+                                <!-- BEGIN row -->
+                                <div class="row">
+                                    <!-- BEGIN col-12 -->
+                                    <div class="lm-col-12">
+
+                                        <!-- BEGIN .entry-conent -->
+                                        <div class="entry-content">
+                                            <div class="woocommerce">
+                                                <?php if($errmsg){ ?>
+                                                <p class="woocommerce-error"><?php echo $errmsg; ?></p>
+                                                <?php } ?>
+                                                <div class="track-order-wrap">
+
+                                                    <div class="left-panel"> <i class="icon lineicon lineicon-search"></i>
+                                                        <p>Find your order</p>
+
+                                                    </div>
+
+                                                    <form action="" method="post" class="track_order">
+
+                                                        <p class="track-order-message">
+                                                            To track your order please enter your Order ID in the box below and press return. This was given to you on your receipt and in the confirmation email you should have received.
+                                                        </p>
+
+                                                        <p class="form-row form-row-first">
+                                                            <label for="orderid">Order ID</label>
+                                                            <input class="input-text" type="text" name="order_code" id="order_code" placeholder="Found in your order confirmation email." value="<?php echo $order_code; ?>" />
+                                                        </p>
+                                                        <p class="form-row form-row-last">
+                                                            <label for="order_email">Billing Email</label>
+                                                            <input class="input-text" type="text" name="billing_email" id="billing_email" placeholder="Email you used during checkout." value="<?php echo $billing_email; ?>" />
+                                                        </p>
+                                                        <div class="clear"></div>
+
+                                                        <p class="form-row">
+                                                            <input type="submit" class="button" name="track" value="Track" />
+                                                        </p>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END .entry-conent -->
+
+                                    </div>
+                                    <!-- END col-12 -->
+                                </div>
+                                <!-- END row -->
+                            </div>
+
+                            <div class="entry-page-items"></div>
+
+                        </article>
+                        <!-- END #post -->
+                    </div>
+                    <!-- END #content -->
+
+                </div>
+                <!-- END #main -->
+
+            </div>
+            <!-- END #page -->
+            <?php include(TEMPLATE_DIR.'ca_footer.html'); ?></div>
+        <!-- END wrap -->
+    </body>
+</html>

@@ -1,0 +1,26 @@
+   	<?php
+   	
+   	echo $status_notification;
+   	
+   	?>
+   	
+   	
+   	<form id="create_notification" name="create_notification" method="post" action="/index.php?m=ucenter&c=index&a=supportCreateNotification">
+ 		
+ 		
+		<span class="legend">Topic: </span> 
+		
+		<input type="text" name="notification_topic" value="">
+		
+		<span class="legend">Message: </span>
+		
+		<textarea maxlength="2000" name="notification_message" id="notification_message"></textarea>
+		
+ 		
+ 		<input type="hidden" name="creator_notification_command" value="1">
+ 		<input type="hidden" name="creator_notification" value="<?php echo $userInfo['id'] ?>">
+ 		
+ 		<input type="submit" value="CREATE">
+ 		 	
+ 	</form>
+ 

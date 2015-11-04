@@ -1,0 +1,194 @@
+<!-- 
+    <?php 
+    echo "<pre>";
+    print_r($confirmed);
+    echo "</pre>";
+    ?> 	   
+ 	    -->
+   
+    
+     	   
+ 	   <div id="myOrders">
+      
+<p></p>
+<?php
+      
+
+      
+  if (count($orders) == 0 ){
+      	echo 'You do not have any orders.';
+      } 	
+       	else {
+   		
+   	
+   	
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$charactersLength = strlen($characters);
+    	$randomString = '';
+		
+    	for ($i = 0; $i < 10; $i++) {
+        	$randomString .= $characters[rand(0, $charactersLength - 1)];
+    	}	
+			
+			
+	$var_1 = $orders2[0]['order_code'];
+	$var_2 = $orders2[0]['created'];
+	$var_3 = $orders2[0]['id'];
+	
+	$full_var = $var_1 . '|' . $var_2 . '|' . $var_3;
+	$encoded_base64 = base64_encode($full_var);
+	//echo $full_var.'<br>';
+	//echo $encoded_base64; 
+   	
+   	
+   	
+      foreach ($orders as $key => $value){
+    
+ 
+    
+    
+    $add_to_cart_id = $orders[$key]['goods_id']; 
+    $image_url = 'http://img1.atido.com/'.$orders[$key]['imgname'];
+    
+   
+    
+
+	
+
+
+		  	
+    echo '<div class="itemOrder '.$randomString.'"  style="border-color:'.$notification_box_color.'">';	
+      
+    echo '<div class="itemOrderDate '.$randomString.'" style="background-color:'.$notification_box_color.'">';		echo '</div>';
+      
+    echo '<div class="itemOrderPreview">'; 	echo '<div class="orderImage"><a target="_blank" href="'; echo getProcutUrl($orders[$key]['url_name'],$orders[$key]['type']); echo '"><img src="'.$image_url.'"></a></div>'; 
+    echo '<div class="productIDs">Product ID: <span class="productNumber">'.$add_to_cart_id.'</span><br><span class="number_of_items">'.$goods_count_notification.'</span></div>'; echo '</div>';	
+   
+
+	echo '<div class="itemOrderPrice">';		echo '<span class="price">CAD &#36;'.$orders[$key][original_price]; echo '</span></div>';
+   
+   
+
+
+
+
+   
+ 	echo '<div class="itemOrderActions">';	
+    	
+    	//show or not Add to Cart button
+    	if ($show_add_to_cart == 1) {
+    	echo '<a   data-product_id="'.$add_to_cart_id .'" data-quantity="1" class="tabAjax _br add_to_cart_button">Add to cart</a><a href="'.getProcutUrl($orders[$key]['url_name'],$orders[$key]['type']).'#customer_reviews" class="tabAjax _br" target="_blank">Feedback</a>';	
+    	}
+    	else {
+    		echo '<a href="'.getProcutUrl($orders[$key]['url_name'],$orders[$key]['type']).'#customer_reviews" class="tabAjax _br"  target="_blank">Feedback</a>';
+    	}
+    	//END show or not Add to Cart button
+    	
+    	
+ 
+    
+ 
+    	echo '</div>';   
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      
+
+      
+    echo '</div>';	
+    echo '<div class="'.$randomString.' deleted"><p>Deleted</p></div>';
+    }
+    
+    	// if payment not received      
+        if ($orders2[0][status] != '已付款'){
+		echo '<a   onclick="RemoveOrderAjax(\''.$encoded_base64.'\'); return false;" class="red_button_radius"  data-quantity="1"  data-hash="'.$randomString.'"   data-product_id="'.$encoded_base64.'">Delete</a>';  	
+  		} 
+   		// END if payment not received
+    
+    
+    
+    
+    
+      } 
+         		if ($orders2[0][status] == '已付款'){
+    	$status = '<span class="green_button_radius">Payment received</span>';
+    	echo $status;
+    	
+    	//echo $var_1;
+    	//echo '<br>'.$confirmed[0]['order_id'];
+    	
+    	if ($confirmed[0]['order_id'] == $var_1){
+    		echo '<p>Order: Confirmed</p>';
+    		
+    	}
+    	else {
+    	$confirm = '<div id="myConfirm"><span class="yellow_button_radius"><a href="#"  onclick="Confirm(\''.$encoded_base64.'\'); return false;">Confirm receiving</a> </span></div>';
+    	echo $confirm;
+    		
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	$status_0 = 1;
+    	$notification_box_color = '#03984d';
+    	
+    	$goods_qty = $orders[$key][goods_qty];
+  		$goods_explode = explode(';', $goods_qty);
+ 
+		// remove empty elements from array 
+    	$goods_explode = array_filter($goods_explode);
+    	
+    	$goods_count = count($goods_explode);
+    	$goods_count_notification = 'Number of items: '.$goods_count;
+    	
+    	
+    	$show_add_to_cart = 0;
+    	
+    } else 
+        if ($orders2[0][status] == '录入'){
+    	$status = '<span class="red_button_radius">Not Paid</span>';
+    	echo $status;
+    	$status_0 = 0;
+    	$delete_order_id = $orders[$key][id];
+    	$notification_box_color = '#ccc';
+    	
+    	$goods_qty = $orders[$key][goods_qty];
+  		$goods_explode = explode(';', $goods_qty);
+ 
+		// remove empty elements from array 
+    	$goods_explode = array_filter($goods_explode);
+    	
+    	$goods_count = count($goods_explode);
+    	$goods_count_notification = 'Number of items: '.$goods_count;
+    	
+    	
+    	
+    	$show_add_to_cart = 1;
+    }
+      
+      ?>
+      
+     </div>
+      <!-- my orders --> 
+      
+       </div>
+            			 
+            			
+            			
+ 
+            		
+            		
+ 

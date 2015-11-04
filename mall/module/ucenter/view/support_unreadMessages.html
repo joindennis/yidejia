@@ -1,0 +1,61 @@
+ 
+<?php 
+
+	if (count($unreadMessages) == 0){
+			echo 'No unread messages.';
+		}
+ 
+
+foreach ($unreadMessages as $key => $value) {
+   
+ 
+	
+$ts = $unreadMessages[$key]['created'];
+$date = new DateTime("@$ts");
+$human_date = $date->format(' Y-m-d H:i:s');
+
+$full_name = ($unreadMessages[$key]["name"]?$unreadMessages[$key]["name"]:"No").' '.($unreadMessages[$key]["last_name"]?$unreadMessages[$key]["last_name"]:" name").'<br>'.$unreadMessages[$key]['email'];
+
+
+if ($unreadMessages[$key]["phone"]){
+	$phone = '<span class="helpMessagePhone"><strong>Phone:</strong> '.$unreadMessages[$key]["phone"].'</span>';
+}
+else {
+	$phone = '<span class="helpMessageNoPhone">No phone</span>';
+}
+
+
+ 
+	$content = $unreadMessages[$key]["message"];
+	$hash_Email = $unreadMessages[$key]['hash'];
+	$topic = $unreadMessages[$key]['topic'];
+ 
+	
+   
+     echo '
+     <div class="helpMessageItem">
+     <div class="helpMessageDate">'.$human_date.' '.$phone.'</div>
+     
+     
+     
+     <strong>  
+     <a onclick="supportLoadMessage(\''; echo $hash_Email; echo '\'); return false;">
+     <div class="helpMessageTopic">'.$topic.'</div>
+     
+     </a></strong>
+     
+     <div class="helpMessageMessage">
+    
+     '.$content.'
+   
+     </div>
+     
+     
+     
+     </div>';
+ }
+
+ 
+
+
+?>

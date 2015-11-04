@@ -1,0 +1,146 @@
+<?php
+
+// sender avatar
+		$sender_avatar_image = $userInfoSender['avatar'];
+	  
+		if ($sender_avatar_image == ''){
+		
+		$grav_url = "/images/ca/ucenter/avatar_by_default.jpg";    
+		 
+		$sender_avatar = $grav_url;
+		
+			
+			} else	
+			{
+			$sender_avatar = '/images/ca/ucenter/avatars/'.$sender_avatar_image;
+		 		
+			}
+
+// reply avatar
+		$reply_avatar_image = $userInfoReply['avatar'];
+	  
+		if ($reply_avatar_image == ''){
+		
+		$grav_url = "/images/ca/ucenter/avatar_by_default.jpg";    
+		 
+		$reply_avatar = $grav_url;
+		 
+			
+			} else	
+			{
+			$reply_avatar = '/images/ca/ucenter/avatars/'.$reply_avatar_image;
+		 		
+			}
+
+
+if ($dataMessage['code'] == -1) {
+	
+	echo 'This email not found.';
+	} 
+	else{
+		
+	if ($userInfoSender['first_name'] ==''){
+		$first_name_sender = 'Unknown name';
+	}	
+	
+	else {
+		$first_name_sender = $userInfoSender['first_name'];
+	}
+	
+	if ($dataMessage['response']['phone'] ==''){
+		$phone_sender = 'Not provided';
+	}	
+	
+	else {
+		$phone_sender = $dataMessage['response']['phone'];
+	}
+	
+	
+	
+	
+	
+		
+		
+	$datePosted = $dataMessage['response']['created']; 
+	echo '<img  class="avatar_image senderAvatar" src="'.$sender_avatar.'">';
+	echo '<div class="singleMessageTopic">Subject: "'.$dataMessage['response']['topic'].'"</div>';
+	echo '<div class="singleMessageDate">'.date('m/d/Y H:i:s', $datePosted);
+	echo '<div class="singleMessageDate">From: '.$first_name_sender.' '.$userInfoSender['last_name'].'</div>';	
+		
+		
+	echo '<span class="notification_simple">Phone: ('.$phone_sender.')</span></div>';
+	
+	echo '<div class="singleMessageMessage">Message: '.$dataMessage['response']['message'].'</div>';	
+}
+
+ 
+ 	if ($messageReply['response']['message'] != ''){
+ 	
+ 	 $datePosted = $messageReply['response']['created']; 
+ 	
+ 	
+ 	echo '<div id="myHelp" class="replyBox">
+ 	<img  class="avatar_image replyAvatar" src="'.$reply_avatar.'">
+ 	<div class="singleMessageTopic"><i class="fa fa-reply"></i> RE: "'.$dataMessage["response"]["topic"].'"</div>
+ 	<div class="singleMessageDate">'.date('m/d/Y H:i:s', $datePosted).'</div>
+ 	<div class="singleMessageMessage">'.$messageReply['response']['message'].'</div>
+ 	
+ 	</div>';
+ 	
+}
+ 
+ 
+  		if ($is_admin){
+  	
+  	  	$current_avatar_image = $userInfo['avatar'];
+	  
+		if ($current_avatar_image == ''){
+		
+		$grav_url = "/images/ca/ucenter/avatar_by_default.jpg";    
+		 
+		$current_avatar = $grav_url;
+		$avatar = 0;
+			
+			} else	
+			{
+			$current_avatar = '/images/ca/ucenter/avatars/'.$current_avatar_image;
+		 	$avatar = 1;	
+			}
+      
+ 
+  	
+  	?>
+  	
+  	<div class="clear"></div>
+  	
+  	
+  	<?php
+  	if ($messageReply['response']['message'] == ''){
+  	?>
+  	 	
+  	
+  		<form id="support_reply" name="support_reply" method="post" action="/index.php?m=ucenter&c=index&a=supportSaveReplyHelpMessage">
+ 		
+ 		 
+		
+		<span class="legend"><i class="fa fa-reply"></i> Reply to <?php echo $senderInfo['first_name'].' '.$senderInfo['last_name'].' (<strong><a href="mailto:'.$senderInfo['email'].'">'.$senderInfo['email'].'</a></strong>)' ?>: </span> 
+		
+		<textarea maxlength="2000" name="support_message" id="support_message"></textarea>
+		
+ 		
+ 		<input type="hidden" name="support_help_reply" value="1">
+ 		<input type="hidden" name="support_user_receiver" value="<?php echo $dataMessage['response']['sender'] ?>">
+ 		<input type="hidden" name="support_user_hash" value="<?php echo $dataMessage['response']['hash'] ?>">
+ 		<input type="hidden" name="support_user_message_id" value="<?php echo $dataMessage['response']['id'] ?>">
+ 		<input type="submit" value="REPLY">
+ 		 	
+ 	</form>
+  	<?php
+  	}
+  	?>
+  	
+  	<?php
+  }
+ 
+
+?>

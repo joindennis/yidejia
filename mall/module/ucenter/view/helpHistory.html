@@ -1,0 +1,93 @@
+ <!-- Messages:
+ 0=unread (by default)
+ 1=read ( by click)-->
+ 
+
+
+<?php
+
+
+
+function trunc($phrase, $max_words) {
+   $phrase_array = explode(' ',$phrase);
+   if(count($phrase_array) > $max_words AND $max_words > 0)
+      $phrase = implode(' ',array_slice($phrase_array, 0, $max_words)).'...';
+   return $phrase;
+}
+
+		if (count($helpMessages) == 0){
+			echo 'No messages.';
+		}
+		
+		else{
+			
+		
+
+		$i=0;
+        foreach ($helpMessages as $key=>$value)
+        {
+        	
+        	
+    $datePosted = $helpMessages[$key]['created'];  
+
+	$posted = date('m/d/Y H:i:s', $datePosted);
+
+
+    $isReadReply =    $datePosted = $helpMessages[$key]['reply_read']; 
+    
+    
+      	
+   	echo '<div class="helpMessageItem">';
+	
+	echo '<div class="helpMessageDate">'.$posted.'</div>';
+	
+	
+	
+	$hash_Email = $helpMessages[$key]['hash'];
+	
+	
+	
+	    
+    if ($helpMessages[$key]['reply_id'] !=0){
+    	
+    	$notification_icon='<a onclick="LoadMessage(\''.$hash_Email.'\'); return false;" class="tabGreyNotification"><i class="fa fa-link"></i></a>';
+    } else{
+    	$notification_icon='';
+    }
+	
+	
+	
+	$singleMessage = $helpMessages[$key]['message'];
+	
+	
+	$cutted_message = trunc($singleMessage, 25);
+	
+	
+	switch ($helpMessages[$key]['is_read']) {
+
+    case 1:
+    
+    echo '<a onclick="LoadMessage(\''; echo $hash_Email; echo '\'); return false;"><div class="helpMessageTopic">'.$helpMessages[$key]['topic'].'</div></a>';
+	echo '<div class="helpMessageMessage">'.$cutted_message.'<span class="notification_icon">'.$notification_icon.'</span></div>';
+         break;
+         
+    case 0:
+    
+    echo '<div class="helpMessageTopic"><strong><a onclick="LoadMessage(\''; echo $hash_Email; echo '\'); return false;">'.$helpMessages[$key]['topic'].'</a></strong></div>';
+	echo '<div class="helpMessageMessage"><strong>'.$cutted_message.'</strong><span class="notification_icon">'.$notification_icon.'</span></div>';
+	
+        break;
+}
+
+	
+	
+	echo '</div>';
+        	
+        
+        	
+        	
+    } // foreach
+
+} // count messages
+?>
+

@@ -1,0 +1,71 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+          
+<!-- BEGIN #page -->
+<div class="container">
+	<div class="row ucenter">
+	
+		<!-- including left menu -->  		
+		<?php include ("ucenter_menu.html"); ?>
+		
+		<!-- main content -->
+		<div class="cont lm-col-9  paddingTop40">
+			<div class="user_center_header">
+				<a name="chapter"></a> <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+				<div class="tabsAjax">
+					<a class="tabAjax" onclick="LoadContent(2); return false;">Billing Address</a>
+					<a class="tabAjax" onclick="LoadContent(3); return false;">Shipping Address</a>
+				</div>
+			</div>
+		</div>
+	
+		<div class="ucenter_contBolck">
+			<div class="cont lm-col-9  paddingTop40">
+			
+			<?php
+			
+			echo $status_update_billing;
+			
+			?>
+				
+				<div id="ajaxContentAddress">  <!-- ajax content -->
+			 
+			 
+				Loading ...
+				
+				
+				 <script> LoadContent(2); </script> 
+				
+				
+			 
+				
+				
+				</div>  <!-- end ajax content -->
+	 
+			  
+				</div>
+			
+			
+		</div>
+	</div>
+</div>
+<!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>
+
+<script>
+	function inputFocus(e) {
+		if(e.value==e.defaultValue) {
+			e.value='';
+			e.style.color='#000'
+		}
+	}
+	
+	function inputBlur(e) {
+		if(!e.value) {
+			e.value=e.defaultValue;
+			e.style.color='#999'
+		} 
+	}
+</script>

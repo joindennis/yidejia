@@ -1,0 +1,362 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+          
+<!-- BEGIN #page -->
+<div class="container">
+	<div class="row ucenter">
+	
+		<!-- including left menu -->  		
+		<?php include ("ucenter_menu.html"); ?>
+		
+		<!-- main content -->
+		<div class="cont lm-col-9  paddingTop40">
+			<div class="user_center_header">
+				<h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+			</div>
+	
+ 
+            
+ 
+     <?php 
+     //echo "dataRedeemResults:<pre>";
+     //print_r($dataRedeemResults);
+     //echo "</pre>";
+     ?>
+     
+     
+     
+         <?php 
+        // echo "goods<pre>";
+        // print_r($goods);
+        // echo "</pre>";
+         ?>
+         
+         
+         
+         
+               
+         <div class="points_table">
+         	
+ 
+
+
+ 
+ 
+ <?php
+ 
+
+ 
+  //	 echo '<pre>';
+   //  print_r($orders);
+      
+    // echo 'array='; print_r($urlList);
+      
+  //	 echo '</pre>';
+  
+  if (count($orders) == 0 ){
+      	echo 'You do not have any orders.';
+      } 	
+      
+      else {
+      	
+      
+ echo '<a  class="ucenter_tab green_redeem_button open_redeem_cart">OPEN/CLOSE REDEEM CART</a>';
+  
+  
+  foreach ($ordersPaid as $key => $value){
+  		
+  		$price_of_item = $ordersPaid[$key]['the_amount'];
+  		$total_spent_money += $price_of_item; 
+  	
+  	
+  }
+  
+ 
+
+	 
+        	
+        	switch (true) {
+        		
+        		case (($total_spent_money >= 0) and ($total_spent_money <=499)):
+        	  
+        		$points_range = 2;
+        		break;
+        		
+        		
+        		
+        		case (($total_spent_money >=500) and ($total_spent_money <=999)):
+        		 
+        		$points_range = 3;
+        		break;
+        		
+        		
+        		case (($total_spent_money >=1000) and ($total_spent_money <=2399)):
+        		
+        		$points_range = 4;
+        		break;
+        		
+        		
+        		case (($total_spent_money >=2400) and ($total_spent_money <=4799)):
+        		
+        		$points_range = 5;
+        		break;
+        		
+        		
+        		case ($total_spent_money >=4800):
+        		
+        		$points_range = 6;
+        		break;
+ 
+        		
+        	}
+
+         
+
+  
+ foreach ($ordersPaid as $key => $value){
+ 	
+ 	
+  $amount_item = $ordersPaid[$key]['the_amount'];
+ 
+ 	$pointsPerOrder = floor($amount_item / 30)*$points_range;
+ 	
+ 	
+ 	$totalPoints = $totalPoints + $pointsPerOrder;  		  
+ 		  
+ }
+ 
+ 
+ 
+ if ($totalPoints == 0){
+ 	echo '<span class="points">No points earned.</span>';
+ }
+ 
+ else {
+ 	 echo '<table class="tftable" border="1"><tr><th>Date</th><th>Gained points</th><th>Price</th><th>Status</th></tr>';
+  
+ 	 foreach ($ordersPaid as $key => $value){
+ 	
+	// show points per order 	
+ 	$amount_item = $ordersPaid[$key]['the_amount'];
+ 	$pointsPerOrder = floor($amount_item / 30)*$points_range;
+ 	
+ 	
+ 	 	
+ 	 	
+ 	 if ($ordersPaid[$key][status] == '录入'){
+    	$status = '<span class="notification_error table_no_bg">'.'Not Paid'.'</span>';
+    }
+    else if ($ordersPaid[$key][status] == '已付款'){
+    	$status = '<span class="notification_success table_no_bg">'.'Payment received'.'</span>';
+    }
+ 
+ 	
+ 	echo '<tr><td>'.$ordersPaid[$key]['the_date'].'
+ 		  </td><td class="amount">'.$pointsPerOrder.'
+ 		  </td> <td class="amount">'.$ordersPaid[$key]['the_amount'].'
+ 		  </td> <td class="center">'.$status.'
+ 		  </td></tr>';	
+ 	 	
+ 	 	
+ 	 	
+ 	 }
+ 	
+ 	echo '</table><p class="curPoints mobile_only">Total points earned: <span class="notification_simple">'.$totalPoints.'</span></p>';		  
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	 echo '<p>History of purchase: </p><table class="tftable  points_spent" border="1"><tr><th>Date</th><th>Points per perchase</th><th>Shipping</th><th>Delivery</th><th>Payment</th></tr>';
+ 
+ 
+ 	if ($userPointsLeft['code'] ==1){
+ 	$new_score = $userPointsLeft['response']['points'];	
+ 	}
+ 	else {
+ 		$new_score = 'Not available';
+ 	}
+ 
+ 
+ 
+ 	 foreach ($ordersRedeem as $key => $value){
+ 	
+ 	
+ 	
+		 
+//		 echo "ordersRedeem<pre>";
+	//	 print_r($ordersRedeem);
+		// echo "</pre>";
+		 
+ 	if ($ordersRedeem[$key]['response'] == 'SUCCESS'){
+ 		 $totalPointsSpent += $ordersRedeem[$key]['the_amount'];
+ 	}
+ 	else {
+ 		$totalPointsSpent += 0;
+ 	}
+ 	
+ 	
+	// show points per order 	
+ 	$amount_item = $ordersRedeem[$key]['the_amount'];
+ 	 
+$ts = $ordersRedeem[$key]['created'];
+$date = new DateTime("@$ts");
+$human_date = $date->format(' Y-m-d H:i:s');
+
+
+$is_shipped_get = $ordersRedeem[$key]['ship_date'];
+$is_delivered_get = $ordersRedeem[$key]['delivery'];
+
+ 
+switch ($is_shipped_get) {
+	case '0000-00-00 00:00:00';
+	$is_shipped_set = 'Not shipped';
+		break;
+	
+	default:
+	
+	$is_shipped_set = 'Shipped at: '.$is_shipped_get;
+		break;
+}
+
+
+switch ($is_delivered_get) {
+	case 0;
+	$is_delivered_set = 'Not delivered';
+		break;
+	
+	case 1;
+	
+	$is_delivered_set = 'Delivered';
+		break;
+}
+
+
+switch ($ordersRedeem[$key]['response']) {
+	case 'SUCCESS';
+	$points_payment_status = '<span class="notification_success table_no_bg">Paid</span>';
+		break;
+	
+	case 'ERROR';
+	$points_payment_status =  '<span class="notification_error table_no_bg">Not enough points</span>';
+		break;
+} 
+ 	 	
+ 
+ 	
+	
+ 	
+ 	
+ 	echo '<tr><td>'.$human_date.'
+ 		  </td><td class="amount">'.$amount_item.'
+ 		   
+ 		 
+ 		  </td><td>'.$is_shipped_set.'
+ 		  </td><td>'.$is_delivered_set.'	
+ 		  </td> <td class="center">'.$points_payment_status.'		
+ 		  	
+ 		
+ 		  </td></tr>';	
+ 	 	
+ 	 	
+ 	 	
+ 	 }
+ 	
+ 	echo '</table><p class="curPoints mobile_only">Total points spent: <span class="notification_simple">'.$totalPointsSpent.'</span></p>';
+ 	
+	echo '<p class="curPoints mobile_only">Total points left: <span class="notification_simple">'.$new_score.'</span></p>';
+ 	
+ 	
+ }
+ 
+   
+ 
+ }
+ ?>
+ 
+ 
+       
+       </div>
+         
+         
+         
+         
+         
+    
+ <h3 class="rewards">FIND YOUR REWARDS</h3>
+  
+    
+ 
+  	<div id="redeem_items">
+ 
+ 
+ <?php
+ 
+ foreach ($goods as $key => $value) {
+  
+  
+  	
+ 				$urlName= $goods[$key]['response']['url_name']; 
+ 				$urlExplode = explode("/", $urlName);
+ 	
+ 				
+ 				$urlType= $goods[$key]['response']['type'];
+ 				
+ 				$full_url = getProcutUrl($urlExplode[0],$urlType);
+  
+  				$id_of_product = $dataRedeemResults[$key]['product_id'];
+  				$alt_of_product = $goods[$key]['response']['desc'];
+  				$price_of_product = $goods[$key]['response']['original_price'];
+  				$title_of_product = $goods[$key]['response']['goods_name'];
+  				$img_url = $goods[$key]['response']['imgname'];
+  				
+  				$points = $dataRedeemResults[$key]['points'];
+  				
+  				$cutted_string = substr($title_of_product,0,41);
+  				$title_of_product = $cutted_string; 
+  
+    echo '
+    
+   	<div class="product_redeem">
+	<a href="'.$full_url.'" target="_blank" class="scores"><img src="http://img1.atido.com/'.$img_url.'" class="lazy" style="display: block;"></a>
+	<span class="item title"><a href="'.$full_url.'" target="_blank">'.$title_of_product.'</a></span>
+	<span class="item price">Original price： <em class="s_red">$ '.$price_of_product.'</em></span>
+	<span class="item vprice"><b>Points：</b>
+	<font class="sgreen">'.$points.'</font>
+	</span>
+		
+	<a class="tabAjax _br add_to_redeem_cart"   data-quantity="1"   data-points="'.$points.'"  data-product_id="'.$id_of_product.'">Add to cart</a>
+	
+	
+	</div>
+    
+    
+    
+    '; 
+ }
+ 
+  
+ ?>
+    <div class="clear"></div>
+ 
+  </div>
+     
+
+   
+		
+	 	</div>
+	</div>
+</div>
+<!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>
+ 
+ 
+ 

@@ -1,0 +1,81 @@
+<div id="myMessages">
+
+
+
+<?php
+
+
+
+function trunc($phrase, $max_words) {
+   $phrase_array = explode(' ',$phrase);
+   if(count($phrase_array) > $max_words AND $max_words > 0)
+      $phrase = implode(' ',array_slice($phrase_array, 0, $max_words)).'...';
+   return $phrase;
+}
+
+
+if ( count($systemMessages) == 0) {
+	echo 'No notifications.';
+}
+else {
+	
+
+
+	$i=0;
+        foreach ($systemMessages as $key=>$value)
+        {
+        	
+        	
+    $datePosted = $systemMessages[$key]['created'];  
+
+	$posted = date('m/d/Y H:i:s', $datePosted);
+
+
+    $isReadReply =    $datePosted = $systemMessages[$key]['reply_read']; 
+    
+    
+      	
+   	echo '<div class="helpMessageItem">';
+	
+	echo '<div class="helpMessageDate">'.$posted.'</div>';
+	
+	
+	
+	$hash_Email = $systemMessages[$key]['hash'];
+	
+ 
+	
+	$singleMessage = $systemMessages[$key]['message'];
+	
+	
+	$cutted_message = trunc($singleMessage, 25);
+	
+	
+	switch ($systemMessages[$key]['read']) {
+
+    case 1:
+    
+    echo '<a onclick="LoadSystemMessage(\''; echo $hash_Email; echo '\'); return false;"><div class="helpMessageTopic">'.$systemMessages[$key]['topic'].'</div></a>';
+	echo '<div class="helpMessageMessage">'.$cutted_message.'</div>';
+         break;
+         
+    case 0:
+    
+    echo '<div class="helpMessageTopic"><a onclick="LoadSystemMessage(\''; echo $hash_Email; echo '\'); return false;">'.$systemMessages[$key]['topic'].'</a></div>';
+	echo '<div class="helpMessageMessage">'.$cutted_message.'</div>';
+	
+        break;
+}
+
+ 
+	echo '</div>';
+        	
+ 	
+        	
+    } // foreach
+} // count messages
+ 
+?>
+
+ 
+ </div> 

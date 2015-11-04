@@ -1,0 +1,299 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+          
+<!-- BEGIN #page -->
+<div class="container">
+	<div class="row ucenter">
+	
+		<!-- including left menu -->  		
+		<?php include ("ucenter_menu.html"); ?>
+		
+		<!-- main content -->
+		<div class="cont lm-col-9  paddingTop40">
+			<div class="user_center_header">
+				<a name="chapter"></a> <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+			</div>
+		</div>
+	
+ <div class="cont lm-col-9  paddingTop40">
+            
+ <div class="user_settings">
+  
+
+<?php   
+
+
+//echo '<pre>';
+//print_r($data);
+//echo '</pre>';
+ 
+
+//echo '<pre>';
+//print_r($oatUser);
+//echo '</pre>';
+	
+if ($oatUser['response']['password'] == 'other'){	
+	
+	
+	
+	$settings_response = 'password';
+	
+}
+
+
+switch ($settings_response) {
+    
+    case 1:
+      echo '<span class="success">Your settings are updated successfully!</span>';
+      echo $email_notification;
+        break;
+    case '':
+        echo " ";
+        break;
+    case 'password':
+        echo '<span class="notification_error">Please, set up your password - <a class="error" href="/index.php?m=ucenter&c=index&a=password">here</a>. <br>You do not have any password now.</span>';
+        break;    
+}
+
+ 
+switch ($data[gender]){
+	
+	case 'm':
+      $checked_m = 'checked= "checked"';
+      $checked_f = '';
+      
+        break;
+    case 'f':
+      $checked_f = 'checked= "checked"';
+      $checked_m = '';
+        
+        break;
+	
+	}
+
+?>
+
+
+  	<p>
+  		
+  		        	<!-- Member status -->
+        	
+        	
+        	<?php
+        	
+        	$birthday_tmp = $data[birthday];
+        	
+        	$birthday_divider = explode('/', $birthday_tmp);
+        	
+        	
+        	
+        	$total_spent;
+        	switch (true) {
+        		
+        		
+        		case ($total_spent <1):
+        		        		
+        		$my_vip_status = 'Visitor';
+        		break;
+        		
+        		case (($total_spent >= 0) and ($total_spent <=499)):
+        		        		
+        		$my_vip_status = 'Silver Member';
+        		break;
+        		
+        		
+        		
+        		case (($total_spent >=500) and ($total_spent <999)):
+        		
+        		$my_vip_status = 'Gold Member';
+        		break;
+        		
+        		
+        		case (($total_spent >=1000) and ($total_spent <2399)):
+        		
+        		$my_vip_status = 'Platinum Member';
+        		break;
+        		
+        		
+        		case (($total_spent >=2400) and ($total_spent <4799)):
+        		
+        		$my_vip_status = 'Diamond Member';
+        		break;
+        		
+        		
+        		case ($total_spent >=4800):
+        		
+        		$my_vip_status = 'Sapphire Member';
+        		break;
+ 
+        		
+        	}
+        	
+        	
+        	echo "VIP Status: <span class='notification_success'>".$my_vip_status."</span>";
+        	
+        	?>
+  		</p>
+  	<form action="" method="post" name="user_settings" id="user_settings">
+  		
+  		First Name: <input type="text" name="fname" value="<?php echo $data[first_name]; ?>"/> 
+  		Last Name: <input type="text" name="lname"  value="<?php echo $data[last_name]; ?>"/> 
+  		Nickname: <input type="text" name="nickname"  value="<?php echo $data[nick_name]; ?>"/> 
+  		
+  		Birthday:
+  		<div class="clear"></div>
+  		
+  		<input type="text" name="birthday_date" id="birthday_date" placeholder="Date"  value="<?php echo $birthday_divider[0]; ?>" maxlength="2"/>
+  		<input type="text" name="birthday_month" id="birthday_month" placeholder="Month"  value="<?php echo $birthday_divider[1]; ?>"  maxlength="2"/>
+  		<input type="text" name="birthday_year" id="birthday_year" placeholder="Year"  value="<?php echo $birthday_divider[2]; ?>"  maxlength="4"/>
+  		
+  		<div class="clear"></div>
+  		
+  		Gender:<br>
+  		<input type="radio" value="m" name="gender" <?php echo $checked_m; ?>/>Male<br> 
+  		<input type="radio" value="f" name="gender" <?php echo $checked_f; ?>/>Female<br><br>
+  		
+  		
+  		Current Email: <span class="current_email"><?php echo $data[email]; ?></span>
+  		
+  		Change Email: <input type="text" name="email"  value=""/><br>
+  		Phone: <input type="text" name="phone"  value="<?php echo $data[phone]; ?>"/><br>
+  		
+  		
+  		
+  		<input type="hidden" name="update" value="1"/>
+  		<input type="submit" value="Update"/>
+  		
+  	</form>
+  	
+  	
+  	
+  </div>
+
+  <div class="user_avatar">
+  	
+  	<div class="avatar_photo">
+      
+      
+      
+      <?php
+      
+      $current_avatar_image = $data['avatar'];
+	 
+	 
+	 
+	 
+		if ($current_avatar_image == ''){
+		
+		 $email = $data['email'];
+	$default = "identicon";
+	$size = 147;
+//	$grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+  	$grav_url = "/images/ca/ucenter/avatar_by_default.jpg";      
+		
+		 
+		 $current_avatar = $grav_url;
+		 $avatar = 0;
+		
+		
+		
+			
+		} else	
+			{
+			 $current_avatar = '/images/ca/ucenter/avatars/'.$current_avatar_image;
+		 $avatar = 1;	
+			}
+      
+      
+      
+      ?>
+      
+    			
+            			
+       <img src="<?php echo $current_avatar; ?>">
+       <a href="/index.php?m=ucenter&c=index&a=avatar" class="notification_simple">Change</a>
+       
+   		
+       </div>
+  	
+  </div>    
+  
+  <div class="clear"></div>
+  
+  <h3>What's Your Skin Type?</h3>
+  <hr class="divider">        		
+ 
+<form action="/" method="get" name="skin_type" id="skin_type">
+	<?php
+	
+	
+ 
+	
+		foreach ($skinType as $key => $value) {
+			if ($key !=0){
+	
+	
+	if ($key == $checked_id){
+		$checked=' checked';
+	}
+	else {
+		$checked= ' ';
+	}
+	
+			echo '<input type="checkbox" name="skin_type" value="'.$key.'" '.$checked.'>'.$skinType[$key]['type'].'<br>';	
+			}
+			
+		} 
+ 
+ ?>
+  
+
+
+
+  <input type="submit" value="SAVE / UPDATE" class="save_my_skin_type">
+</form>
+      
+    <div id="mySkinTypeIs"></div>
+   
+    
+  	   </div>
+		
+	 
+	</div>
+</div>
+<!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+ <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+ 
+ <script>
+ jQuery(function() {
+ jQuery( "#birthday" ).datepicker();
+});
+</script> 
+ 
+<script>
+	function inputFocus(e) {
+		if(e.value==e.defaultValue) {
+			e.value='';
+			e.style.color='#000'
+		}
+	}
+	
+	function inputBlur(e) {
+		if(!e.value) {
+			e.value=e.defaultValue;
+			e.style.color='#999'
+		} 
+	}
+	
+	
+jQuery('input[type="checkbox"]').on('change', function() {
+   jQuery('input[type="checkbox"]').not(this).prop('checked', false);
+});
+	
+	
+	
+</script>

@@ -1,0 +1,115 @@
+<!-- including header -->  		
+<?php include ("ucenter_header.html"); ?>
+          
+      
+<!-- BEGIN #page -->
+<div class="container">
+            	
+            	
+     <div class="row ucenter">
+            		
+          
+      <!-- including left menu -->  		
+      <?php include ("ucenter_menu.html"); ?>
+            		
+            		
+         
+      <!-- main content -->
+       <div class="cont lm-col-9  paddingTop40">
+       <div class="user_center_header">
+       <a name="chapter"></a> <h3 class="paddingLeft25"><?php echo $seo_ucenter_title; ?></h3>
+       
+        <div class="tabsAjax">
+            				
+
+            				
+       </div>
+       
+       
+       </div>
+            				
+       </div>
+            		
+       <div class="ucenter_contBolck">  		
+       <div class="cont lm-col-12  paddingTop40">
+       	
+       	
+       	<?php
+       	
+       	
+  //  echo '<pre>';
+     //	print_r($dataWishList);
+       		
+  // print_r($goods);
+   //  print_r($goodsTag);
+   
+     
+       		
+  //   echo '</pre>';
+       	
+      if (count($goods) == 0 ){
+      	echo 'No items in your wishlist.';
+      } 	
+       	else {
+       		
+       	
+       	
+       	foreach ($goods as $key => $value)
+			   {
+			   	
+			   $posted = date('m/d/Y H:i:s', $dataWishList[$key]['created']);
+			    
+			   
+			   	// get url_name
+ 				$urlName= $goods[$key]['response']['url_name']; 
+ 				$urlExplode = explode("/", $urlName);
+ 	
+ 				// get url type
+ 				$urlType= $goods[$key]['response']['type'];
+			   
+			   
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$charactersLength = strlen($characters);
+    	$randomString = '';
+		
+    	for ($i = 0; $i < 10; $i++) {
+        	$randomString .= $characters[rand(0, $charactersLength - 1)];
+    	}
+			   
+			   
+			   
+			   	
+   	echo '   <div class="wish_item '.$randomString.'">';
+   	
+   	echo '<div class="wish_image"><a class="wishListItem" data-product_id="'.$goods[$key][response][goods_id].'" target="_blank" href="'.getProcutUrl($urlExplode[0],$urlType).'"><img src="http://img1.atido.com/'.$goods[$key][response][imgname].'" /></a> </div>';
+   	
+   	echo '<div class="wish_price"  data-hash="'.$randomString.'">CAD $'.$goods[$key][response][sale_price].'<a href="'. $link_to_item.'" data-quantity="1" data-product_id="'.$goods[$key][response][goods_id].'" class="tabAjax add_to_cart_button mobile_only">ADD TO CART</a></div>';
+	echo '<a href="#"  onclick="return false;" class="wish_list_item_remove"  data-hash="'.$randomString.'"  data-product_id="'.$goods[$key][response][goods_id].'">x</a>';
+    echo '</div>';
+
+			 } // foreach
+		   
+        	
+      } // count wishlist
+       	
+       	
+       	?>
+       	
+ 
+            		 
+  	   </div>
+            		
+     
+       
+   		</div>		
+		
+            		
+     		
+      
+       </div>
+            	
+       </div>
+       <!-- end container -->
+
+<!-- including footer -->  		
+<?php include ("ucenter_footer.html"); ?>

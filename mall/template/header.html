@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title><?php echo $seo['title']?$seo['title']:'please set'; ?></title>
+        <meta name="keywords" content="<?php echo $seo['keywords']?$seo['keywords']:'please set'; ?>" />
+        <meta name="description" content="<?php echo $seo['description']?$seo['description']:'plase set'; ?>" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <link type="text/css" charset="utf-8" rel="stylesheet" href="http://static.yidejia.com/min/b=css&f=international/common.css,js/jquery.jqzoom.css,js/popboxForEn.css,js/dverify.css" />
+
+        <link type="text/css" charset="utf-8" rel="stylesheet" href="http://static.yidejia.com/min/b=css&f=international/<?php echo $css; ?>.css" />
+
+        <!--[if lt IE 9]><script src="http://static.yidejia.com/min/b=js&f=core/html5.js"></script><![endif]-->
+    </head>
+    <body>
+        <header class="header">
+            <div class="header_1">
+                <a class="e_logo" href="/">YIDEJIA.com</a>
+                <section class="a_group">
+                    <?php if(!$user){ ?>
+                    <a href="/login.html">
+                        <i class="e_icon_0">&#xe636;</i>
+                        <b>Sign in or Join Free</b>
+                    </a>
+                    <a href="/register.html">
+                        <i class="e_icon_5">&#xe638;</i>
+                        <b>Register</b>
+                    </a>
+                    <?php }else{ ?>
+                    <a href="/index.php?m=ucenter&c=order&a=index">
+                        <i class="e_icon_1">&#xe629;</i>
+                        <b>Welcome! <?php echo $user['handset']; ?></b>
+                    </a>
+                    <a href="/index.php?m=user&c=index&a=logout">
+                        <i class="e_icon_4">&#xe634;</i>
+                        <b>logout</b>
+                    </a>
+                    <?php } ?>
+                    <a href="">
+                        <i class="e_icon_2">&#xe607;</i>
+                        <b>Online Chat</b>
+                    </a>
+                    <a href="">
+                        <i class="e_icon_3">&#xe628;</i>
+                        <b>shipping to</b>
+                    </a>
+                </section>
+            </div>
+            <div class="header_2">
+                <section class="m_menu">
+                    <strong class="J_menuHeader">CATEGORIES</strong>
+                    <nav class="m_menu_main J_menuBody">
+                        <a class="m_menu_item" href="/clothing.html" target="_blank">
+                            <img src="http://img2.atido.com/8/2014/10/17/e0c475b585d.png" alt="">
+                            <span>
+                                <b>Clothing</b>
+                                <i>&#xe60a;</i>
+                                <big></big>
+                            </span>
+                        </a>
+                        <a class="m_menu_item" href="/skincare.html" target="_blank">
+                            <img src="http://img1.atido.com/3/2014/10/24/ea78b31204e.png" alt="">
+                            <span>
+                                <b>Skincare</b>
+                                <i>&#xe60a;</i>
+                                <big></big>
+                            </span>
+                        </a>
+                        <a class="m_menu_item" href="/nutrition.html" target="_blank">
+                            <img src="http://img2.atido.com/5/2014/10/17/8c8ae08a2394.png" alt="">
+                            <span>
+                                <b>Nutrition</b>
+                                <i>&#xe60a;</i>
+                                <big></big>
+                            </span>
+                        </a>
+                        <a class="m_menu_item" href="/makeup.html" target="_blank">
+                            <img src="http://img1.atido.com/5/2014/10/17/e0e333d2283.png" alt="">
+                            <span>
+                                <b>Makeup</b>
+                                <i>&#xe60a;</i>
+                                <big></big>
+                            </span>
+                        </a>
+                    </nav>
+                </section>
+                <form class="c_search" action="/Search" method="GET" >
+                    <input type="text" name="keywords" placeholder="what are you looking for?" value="Skin Care" >
+                    <input type="submit" value="&#x3481;">
+                </form>
+                <a class="a_cart" href="/shopping-cart.html">
+                    <i>&#xe627;</i>
+                    <b>Cart</b>
+                    <em><?php echo $cart_size; ?></em>
+                </a>
+            </div>
+        </header>

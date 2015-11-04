@@ -1,0 +1,62 @@
+
+    <?php 
+    echo "<pre>";
+    print_r($replyMessages);
+    echo "</pre>";
+    ?>
+
+
+<?php 
+
+	if (count($replyMessages) == 0){
+			echo 'No messages.';
+		}
+  
+
+foreach ($replyMessages as $key => $value) {
+   
+ 
+	
+$ts = $replyMessages[$key]['created'];
+$date = new DateTime("@$ts");
+$human_date = $date->format(' Y-m-d H:i:s');
+
+$full_name = ($replyMessages[$key]["name"]?$replyMessages[$key]["name"]:"No").' '.($replyMessages[$key]["last_name"]?$replyMessages[$key]["last_name"]:" name").'<br>'.$replyMessages[$key]['email'];
+
+if ($replyMessages[$key]["phone"]){
+	$phone = '<span class="helpMessagePhone"><strong>Phone:</strong> '.$replyMessages[$key]["phone"].'</span>';
+}
+else {
+	$phone = '<span class="helpMessageNoPhone">No phone</span>';
+}
+
+ 
+	
+	
+ 
+ 
+	$content = $replyMessages[$key]["message"];
+	$hash_Email = $replyMessages[$key]['hash'];
+	
+	
+   
+      echo '
+     <div class="helpMessageItem">
+     <div class="helpMessageDate">'.$human_date.'</div>
+     
+     <div class="supportMessageTopic">'.$phone.'</div>
+     
+     
+     <div class="helpMessageMessage">
+     <a onclick="supportLoadMessage(\''; echo $hash_Email; echo '\'); return false;">
+     '.$content.'
+     </a>
+     </div>
+     
+     </div>';
+ }
+
+ 
+
+
+?>
